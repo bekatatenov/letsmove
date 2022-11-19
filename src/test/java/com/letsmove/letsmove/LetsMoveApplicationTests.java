@@ -1,10 +1,10 @@
-package com.lertsmove.lertsmove;
+package com.letsmove.letsmove;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LertsmoveApplicationTests {
+class LetsMoveApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,13 +1,13 @@
-package com.lertsmove.lertsmove;
+package com.letsmove.letsmove;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LertsmoveApplication {
+public class LetsMoveApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LertsmoveApplication.class, args);
+        SpringApplication.run(LetsMoveApplication.class, args);
     }
 
 }
