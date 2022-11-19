@@ -19,7 +19,7 @@ public class CommentsTour {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
-    private User userID;
+    private Users usersID;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TOUR_ID")

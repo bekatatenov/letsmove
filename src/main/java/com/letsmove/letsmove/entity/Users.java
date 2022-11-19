@@ -12,7 +12,7 @@ import java.util.Date;
 @Table(name = "users")
 @Getter
 @Setter
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
     @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
@@ -25,7 +25,7 @@ public class User {
     private String password;
 
     @Column(name = "EMAIL")
-    private Integer email;
+    private String email;
 
     @Column(name = "ROLE")
     @Enumerated(EnumType.STRING)

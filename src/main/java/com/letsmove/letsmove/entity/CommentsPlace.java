@@ -18,7 +18,7 @@ public class CommentsPlace {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
-    private User userID;
+    private Users usersID;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PLACE_ID")

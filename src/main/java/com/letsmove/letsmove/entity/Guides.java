@@ -17,7 +17,7 @@ public class Guides {
 
     @OneToOne
     @JoinColumn(name = "USER_ID")
-    private User userID;
+    private Users usersID;
 
     @Column(name = "FIO")
     private String fio;

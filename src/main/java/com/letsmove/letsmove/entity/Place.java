@@ -22,7 +22,7 @@ public class Place{
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
-    private User userID;
+    private Users usersID;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CITY_ID")
