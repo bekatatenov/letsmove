@@ -22,8 +22,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
     @Value("${spring.queries.users-query}")
     private String usersQuery;
-    @Value("${spring.queries.roles-query}")
-    private String rolesQuery;
     @Bean
     public PasswordEncoder passwordEncoder()
     {
@@ -37,7 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.
                 jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)
-                .authoritiesByUsernameQuery(rolesQuery)
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder());
     }
@@ -45,16 +42,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
-                .antMatchers("/", "/login", "/register", "/registration").permitAll()
+                .antMatchers("/", "/login", "/register","/registration").permitAll()
                 .antMatchers("/create-city").authenticated()  // Права для админа
                 .and().csrf().disable()
                 .formLogin().successHandler(customizeAuthenticationSuccessHandler)
                 .loginPage("/login").failureUrl("/login?error=true")
-                .usernameParameter("email")
+                .usernameParameter("login")
                 .passwordParameter("password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and().exceptionHandling()
+                .logoutSuccessUrl("/hello").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
     }
     @Override

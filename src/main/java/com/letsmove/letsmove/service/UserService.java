@@ -23,9 +23,9 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 
-        Users user = userRepository.findByEmail(email)
+        Users user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -33,4 +33,5 @@ public class UserService implements UserDetailsService {
 
         return new User(user.getEmail(), user.getPassword(), authorities);
     }
+
 }

@@ -50,6 +50,11 @@ public class UserController {
         String login = users.getLogin();
         users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
         this.userService.save(users);
-        return "login";
+        return "hello";
+    }
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String hello() {
+        return "hello";
     }
 }
