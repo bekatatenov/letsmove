@@ -27,7 +27,7 @@ public class UserController {
 
         ModelAndView model = new ModelAndView();
         if (error != null) {
-            model.addObject("error", "Почта или параоль неверны");
+            model.addObject("error", "Почта или пароль неверны");
             model.setViewName("/login");
         }
         if (logout != null) {
@@ -47,6 +47,7 @@ public class UserController {
 
     @PostMapping(value = "/registration")
     public String registration(@ModelAttribute(name = "user") Users users) {
+        String login = users.getLogin();
         users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
         this.userService.save(users);
         return "login";
