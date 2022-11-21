@@ -22,28 +22,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
     @Value("${spring.queries.users-query}")
     private String usersQuery;
+
     @Bean
-    public PasswordEncoder passwordEncoder()
-    {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Autowired
     CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.
-                jdbcAuthentication()
-                .usersByUsernameQuery(usersQuery)
+                jdbcAuthentication().usersByUsernameQuery(usersQuery)
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder());
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
-                .antMatchers("/", "/login", "/register","/registration").permitAll()
-                .antMatchers("/create-city").authenticated()  // Права для админа
+                .antMatchers("/", "/login", "/register", "/registration","/manager_registration","/manager_register","/guides_registration","/guides_register").permitAll()
+                .anyRequest()
+                .authenticated()
                 .and().csrf().disable()
                 .formLogin().successHandler(customizeAuthenticationSuccessHandler)
                 .loginPage("/login").failureUrl("/login?error=true")
@@ -51,13 +54,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/hello").and().exceptionHandling()
+                .logoutSuccessUrl("/").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**","/templates/**" ,"/static/**", "registration");
+                .antMatchers("/resources/**", "/templates/**", "/static/**", "registration");
     }
 }

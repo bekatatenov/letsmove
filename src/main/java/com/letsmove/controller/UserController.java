@@ -8,13 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+
+
 @Controller
 public class UserController {
-    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     private UserService userService;
-
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login() {
@@ -23,7 +24,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView loginPage(@RequestParam(value = "error", required = false) String error,
-                                  @RequestParam(value = "logout", required = false) String logout) {
+                                  @RequestParam(value = "logout",	required = false) String logout) {
 
         ModelAndView model = new ModelAndView();
         if (error != null) {
@@ -37,6 +38,11 @@ public class UserController {
         return model;
     }
 
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String hello() {
+        return "hello";
+    }
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView("registration");
@@ -46,14 +52,15 @@ public class UserController {
 
 
     @PostMapping(value = "/registration")
-    public String registration(@ModelAttribute(name = "user") Users users) {
-        users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
-        this.userService.save(users);
-        return "hello";
-    }
-
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello() {
+    public String registration(@RequestParam(value = "error", required = false) String error,@ModelAttribute(name = "user") Users user) {
+        Users users = userService.FindByLogin(user.getLogin());
+        if(users!=null){
+            ModelAndView model = new ModelAndView();
+            model.addObject("error", "Login busy");
+            model.setViewName("/register");
+        }else {
+            this.userService.save(user);
+        }
         return "hello";
     }
 }

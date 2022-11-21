@@ -1,13 +1,19 @@
- <!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Spring Security Example</title>
 </head>
-<body>
-Hello 
+<body >
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<form th:action="@{/manager_register}" method="get">
+    <input type="submit" value="Стать менеджером"/>
+</form>
+<form th:action="@{/guides_register}" method="get">
+    <input type="submit" value="Стать гидом"/>
+</form>
 </body>
 </html>

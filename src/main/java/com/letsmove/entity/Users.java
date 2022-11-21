@@ -18,13 +18,13 @@ public class Users {
     @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
     private Integer id;
 
-    @Column(name = "LOGIN")
+    @Column(name = "LOGIN",unique = true)
     private String login;
 
     @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL",unique = true)
     private String email;
 
     @Column(name = "ROLE")
