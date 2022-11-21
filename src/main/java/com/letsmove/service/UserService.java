@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class UserService  {
+public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
@@ -34,5 +34,16 @@ public class UserService  {
     }
     public void update(Users users) {
         this.userRepository.save(users);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Users user = this.userRepository.findFirstByLogin(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+        return new User(user.getLogin(), user.getPassword(), authorities);
     }
 }

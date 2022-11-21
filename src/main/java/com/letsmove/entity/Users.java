@@ -18,6 +18,8 @@ public class Users {
     @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
     private Integer id;
 
+    private Boolean active;
+
     @Column(name = "LOGIN",unique = true)
     private String login;
 

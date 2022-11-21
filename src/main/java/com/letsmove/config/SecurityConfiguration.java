@@ -22,6 +22,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
     @Value("${spring.queries.users-query}")
     private String usersQuery;
+    @Value("${spring.queries.roles-query}")
+    private String roleQuery;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -36,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.
                 jdbcAuthentication().usersByUsernameQuery(usersQuery)
+                .authoritiesByUsernameQuery(roleQuery)
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder());
     }
