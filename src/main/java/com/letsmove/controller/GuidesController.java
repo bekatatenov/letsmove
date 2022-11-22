@@ -26,8 +26,13 @@ public class GuidesController {
 
 
     @PostMapping(value = "/guides_registration")
-    public String guidesRegistration(@ModelAttribute(name = "guides") Guides guides, @RequestParam(name = "login") String login) {
-        this.guidesService.save(guides,login);
-        return "hello";
+    public String guidesRegistration(@ModelAttribute(name = "guides") Guides guides) {
+        this.guidesService.save(guides);
+        return "guideMain";
+    }
+
+    @RequestMapping(value = "/guideMain", method = RequestMethod.GET)
+    public String guideMain() {
+        return "guideMain";
     }
 }

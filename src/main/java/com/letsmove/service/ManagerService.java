@@ -5,6 +5,8 @@ import com.letsmove.entity.Manager;
 import com.letsmove.entity.Users;
 import com.letsmove.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -15,8 +17,10 @@ public class ManagerService {
     private ManagerRepository managerRepository;
     @Autowired
     private UserService userService;
-    public Manager save(Manager manager,String login) {
-        Users users = userService.FindByLogin(login);
+
+    public Manager save(Manager manager) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users users = userService.FindByLogin(auth.getName());
         manager.setUsersID(users);
         users.setRole(Role.MANAGER);
         userService.update(users);

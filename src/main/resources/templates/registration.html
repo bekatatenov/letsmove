@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:if="${param.error} != null">
-    Login busy
+    Login busy.
 </div>
 <form th:action="@{/registration}" method="post" th:object="${user}">
     <div><label> Login : <input th:value="${login}" type="text" name="login" autofocus required/> </label></div>
@@ -15,8 +15,9 @@
     <br>
     <div><label> Password: <input th:value="${password}" type="password" name="password" autofocus required/> </label></div>
     <br>
-    <div><input type="submit" value="Sign UP"/></div>
+    <div><input type="submit" value="Sign UP"/>
     <a th:href="@{/login}"><input type="button" value="Sign IN"/></a>
+    </div>
 </form>
 </body>
 </html>

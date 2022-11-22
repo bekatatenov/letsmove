@@ -8,13 +8,12 @@
 <form th:action="@{/guides_registration}" method="post" th:object="${guides}">
     <div><label> FIO : <input th:value="${fio}" type="text" name="fio" autofocus required/> </label></div>
     <br>
-    <div><label> Phone Number : <input th:value="${phoneNumber}" type="number" name="phoneNumber" autofocus required/> </label></div>
+    <div><label> Phone Number : <input th:value="${phoneNumber}" type="number" name="phoneNumber" autofocus required/>
+    </label></div>
     <br>
     <div><label> IMG url : <input th:value="${img}" type="url" name="img" autofocus required/> </label></div>
     <br>
     <div><label> Information: <input th:value="${info}" type="text" name="info" autofocus required/> </label></div>
-    <br>
-    <div><label> Login: <input th:value="${login}" type="text" name="login" autofocus required/> </label></div>
     <br>
     <div><input type="submit" value="Sign UP"/></div>
 </form>

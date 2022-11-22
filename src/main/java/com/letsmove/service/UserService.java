@@ -27,11 +27,14 @@ public class UserService implements UserDetailsService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRole(Role.USER);
         user.setCreatedDate(new Date());
+        user.setActive(true);
         return userRepository.save(user);
     }
-    public Users FindByLogin(String login){
+
+    public Users FindByLogin(String login) {
         return userRepository.findFirstByLogin(login);
     }
+
     public void update(Users users) {
         this.userRepository.save(users);
     }

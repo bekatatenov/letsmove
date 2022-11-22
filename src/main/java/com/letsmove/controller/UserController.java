@@ -19,12 +19,12 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login() {
-        return "login";
+        return "main";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView loginPage(@RequestParam(value = "error", required = false) String error,
-                                  @RequestParam(value = "logout",	required = false) String logout) {
+                                  @RequestParam(value = "logout", required = false) String logout) {
 
         ModelAndView model = new ModelAndView();
         if (error != null) {
@@ -38,9 +38,9 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @RequestMapping(value = "/userMain", method = RequestMethod.GET)
     public String hello() {
-        return "hello";
+        return "userMain";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -52,15 +52,16 @@ public class UserController {
 
 
     @PostMapping(value = "/registration")
-    public String registration(@RequestParam(value = "error", required = false) String error,@ModelAttribute(name = "user") Users user) {
-        Users users = userService.FindByLogin(user.getLogin());
-        if(users!=null){
-            ModelAndView model = new ModelAndView();
-            model.addObject("error", "Login busy");
-            model.setViewName("/register");
-        }else {
-            this.userService.save(user);
-        }
-        return "hello";
+    public String registration(@RequestParam(value = "error", required = false) String error, @ModelAttribute(name = "user") Users user) {
+        ModelAndView model = new ModelAndView();
+        this.userService.save(user);
+        return "login";
     }
+
+    @RequestMapping(value = "/adminMain", method = RequestMethod.GET)
+    public String adminMain() {
+        return "adminMain";
+    }
+
+
 }
