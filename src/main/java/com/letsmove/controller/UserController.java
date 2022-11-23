@@ -3,6 +3,10 @@ package com.letsmove.controller;
 import com.letsmove.entity.Users;
 import com.letsmove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +56,7 @@ public class UserController {
 
 
     @PostMapping(value = "/registration")
-    public String registration(@RequestParam(value = "error", required = false) String error, @ModelAttribute(name = "user") Users user) {
+    public String registration(@ModelAttribute(name = "user") Users user) {
         ModelAndView model = new ModelAndView();
         this.userService.save(user);
         return "login";
@@ -63,5 +67,13 @@ public class UserController {
         return "adminMain";
     }
 
+    @RequestMapping(value = "/change_password", method = RequestMethod.GET)
+    public ModelAndView changePassword() {
+        ModelAndView modelAndView = new ModelAndView("changePassword");
+        modelAndView.addObject("oldPassword", new String());
+        modelAndView.addObject("newPassword", new String());
+        modelAndView.addObject("newPasswordRepeat", new String());
+        return modelAndView;
+    }
 
 }

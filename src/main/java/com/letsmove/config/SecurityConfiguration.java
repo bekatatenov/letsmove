@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
-                .antMatchers("/", "/login", "/register", "/registration").permitAll()
+                .antMatchers("/", "/login", "/register", "/registration","/change_password").permitAll()
                 .antMatchers("/manager_registration", "/manager_register", "/guides_registration", "/guides_register")
                 .hasAuthority("USER")
                 .anyRequest()
