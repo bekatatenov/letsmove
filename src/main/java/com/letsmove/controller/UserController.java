@@ -1,18 +1,20 @@
 package com.letsmove.controller;
 
+import com.letsmove.dto.NewPasswordUser;
+import com.letsmove.entity.Token;
 import com.letsmove.entity.Users;
+import com.letsmove.service.EmailSenderService;
+import com.letsmove.service.TokenService;
 import com.letsmove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
+import javax.mail.MessagingException;
 
 
 @Controller
@@ -20,6 +22,15 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TokenService tokenService;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login() {
@@ -75,5 +86,32 @@ public class UserController {
         modelAndView.addObject("newPasswordRepeat", new String());
         return modelAndView;
     }
+    @GetMapping(value = "/forgotPassword")
+    public String resetPasswordPage() {
+        return "forgotPassword";
+    }
+    @PostMapping(value = "/passwordRecoveryEmail")
+    public ModelAndView getEmailForResetPassword(@RequestParam String email) throws MessagingException {
+        ModelAndView modelAndView = new ModelAndView("token");
+        Users saved = userService.findByEmailUser(email);
+        Token token = tokenService.saveToken(saved, tokenService.makeToken());
+        emailSenderService.sendEmail(saved.getEmail(),"Восстановление пароля",String.valueOf(token.getToken()));
+        NewPasswordUser newPasswordUser = new NewPasswordUser();
+        newPasswordUser.setEmail(email);
+        modelAndView.addObject("reset", newPasswordUser);
+        return modelAndView;
+    }
+    @PostMapping(value = "/newPasswordUser")
+    public String newPassword(@ModelAttribute(name = "reset") NewPasswordUser newPasswordUser) throws Exception {
+        Users users = userService.findByEmailUser(newPasswordUser.getEmail());
+        Token byUserAndToken = tokenService.findByUserAndToken(users, newPasswordUser.getToken());
+        if(newPasswordUser.getPassword().equals(newPasswordUser.getRepeatPassword())){
+        users.setPassword(bCryptPasswordEncoder.encode(newPasswordUser.getPassword()));
+        }else throw new Exception("Пароли не совпадают");
+        userService.save(users);
+        tokenService.deleteToken(byUserAndToken);
+        return "login";
+    }
+
 
 }

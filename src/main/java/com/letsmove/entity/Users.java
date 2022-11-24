@@ -35,4 +35,7 @@ public class Users {
 
     @Column(name = "CREATED_DATE")
     private Date createdDate;
+
+    @Column(name = "NEW_PASSWORD")
+    private String newPassword;
 }

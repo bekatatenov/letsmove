@@ -37,6 +37,11 @@ public class UserService implements UserDetailsService {
         return userRepository.findFirstByLogin(login);
     }
 
+    public Users findByEmailUser(String email) {
+        return userRepository.findByEmail(email);
+                //.orElseThrow(() -> new NoSuchFieldException("Не найден пользователь по email: " + email));
+    }
+
     public void update(Users users) {
         this.userRepository.save(users);
     }
@@ -52,4 +57,5 @@ public class UserService implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         return new User(user.getLogin(), user.getPassword(), authorities);
     }
+
 }
