@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
     }
 
     public Users FindByLogin(String login) {
-        return userRepository.findFirstByLogin(login);
+        return userRepository.findByLogin(login);
     }
 
     public Users findByEmailUser(String email) {

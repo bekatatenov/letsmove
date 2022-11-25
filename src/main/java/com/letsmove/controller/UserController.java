@@ -70,9 +70,13 @@ public class UserController {
 
     @PostMapping(value = "/registration")
     public String registration(@ModelAttribute(name = "user") Users user) {
-        ModelAndView model = new ModelAndView();
-        this.userService.save(user);
-        return "login";
+        try {
+            ModelAndView model = new ModelAndView();
+            this.userService.save(user);
+            return "login";
+        }catch (Exception e){
+            return "registration";
+        }
     }
 
     @RequestMapping(value = "/adminMain", method = RequestMethod.GET)
@@ -88,17 +92,12 @@ public class UserController {
     @PostMapping(value = "/passwordRecoveryEmail")
     public ModelAndView getEmailForResetPassword(@RequestParam String login) throws MessagingException {
         ModelAndView modelAndView = new ModelAndView("changePassword");
-        try {
-            Users saved = userService.FindByLogin(login);
-            Token token = tokenService.saveToken(saved, tokenService.makeToken());
-            emailSenderService.sendEmail(saved.getEmail(), "Введите данный токен, чтобы сбросить ваш пароль: " + String.valueOf(token.getToken()), "Восстановление пароля");
-            NewPasswordUser newPasswordUser = new NewPasswordUser();
-            newPasswordUser.setEmail(saved.getEmail());
-            modelAndView.addObject("reset", newPasswordUser);
-        } catch (Exception e) {
-            modelAndView.addObject("error", "error");
-            modelAndView.setViewName("/passwordRecoveryEmail");
-        }
+        Users saved = userService.FindByLogin(login);
+        Token token = tokenService.saveToken(saved, tokenService.makeToken());
+        emailSenderService.sendEmail(saved.getEmail(), "Введите данный токен, чтобы сбросить ваш пароль: " + String.valueOf(token.getToken()), "Восстановление пароля");
+        NewPasswordUser newPasswordUser = new NewPasswordUser();
+        newPasswordUser.setEmail(saved.getEmail());
+        modelAndView.addObject("reset", newPasswordUser);
         return modelAndView;
     }
 
