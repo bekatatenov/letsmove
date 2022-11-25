@@ -112,6 +112,4 @@ public class UserController {
         tokenService.deleteToken(byUserAndToken);
         return "login";
     }
-
-
 }
