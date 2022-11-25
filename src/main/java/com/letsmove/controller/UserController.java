@@ -86,14 +86,19 @@ public class UserController {
     }
 
     @PostMapping(value = "/passwordRecoveryEmail")
-    public ModelAndView getEmailForResetPassword(@RequestParam String email) throws MessagingException {
+    public ModelAndView getEmailForResetPassword(@RequestParam String login) throws MessagingException {
         ModelAndView modelAndView = new ModelAndView("changePassword");
-        Users saved = userService.findByEmailUser(email);
-        Token token = tokenService.saveToken(saved, tokenService.makeToken());
-        emailSenderService.sendEmail(saved.getEmail(), "Восстановление пароля", String.valueOf(token.getToken()));
-        NewPasswordUser newPasswordUser = new NewPasswordUser();
-        newPasswordUser.setEmail(email);
-        modelAndView.addObject("reset", newPasswordUser);
+        try {
+            Users saved = userService.FindByLogin(login);
+            Token token = tokenService.saveToken(saved, tokenService.makeToken());
+            emailSenderService.sendEmail(saved.getEmail(), "Введите данный токен, чтобы сбросить ваш пароль: " + String.valueOf(token.getToken()), "Восстановление пароля");
+            NewPasswordUser newPasswordUser = new NewPasswordUser();
+            newPasswordUser.setEmail(saved.getEmail());
+            modelAndView.addObject("reset", newPasswordUser);
+        } catch (Exception e) {
+            modelAndView.addObject("error", "error");
+            modelAndView.setViewName("/passwordRecoveryEmail");
+        }
         return modelAndView;
     }
 

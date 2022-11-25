@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class NewPasswordUser {
+    private String login;
     private String email;
     private String password;
     private String repeatPassword;
