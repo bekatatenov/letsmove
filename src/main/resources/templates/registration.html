@@ -2,22 +2,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example</title>
+    <title>Registration</title>
 </head>
 <body>
 <div th:if="${param.error} != null">
     Login already used.
 </div>
 <form th:action="@{/registration}" method="post" th:object="${user}">
-    <div><label> Login : <input th:value="${login}" type="text" name="login" autofocus required/> </label></div>
+    <div><label> Login : <input th:value="${login}" type="text" name="login" autofocus required/> </label>
+    </div>
     <br>
-    <div><label> Email : <input th:value="${email}" type="email" name="email" autofocus required/> </label></div>
+    <div><label> Email : <input th:value="${email}" type="email" name="email" autofocus required/> </label>
+    </div>
     <br>
-    <div><label> Password: <input th:value="${password}" type="password" name="password" autofocus required/> </label></div>
+    <div><label> Password: <input th:value="${password}" type="password" name="password" autofocus
+                                  required/> </label></div>
     <br>
     <div><input type="submit" value="Sign UP"/>
-    <a th:href="@{/login}"><input type="button" value="Sign IN"/></a>
+        <a th:href="@{/login}"><input type="button" value="Sign IN"/></a>
     </div>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
 </body>
 </html>
