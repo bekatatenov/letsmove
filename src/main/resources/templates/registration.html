@@ -15,8 +15,7 @@
     <div><label> Email : <input th:value="${email}" type="email" name="email" autofocus required/> </label>
     </div>
     <br>
-    <div><label> Password: <input th:value="${password}" type="password" name="password" autofocus
-                                  required/> </label></div>
+    <div><label> Password: <input th:value="${password}" type="password" name="password" size="8" autofocus required/> </label></div>
     <br>
     <div><input type="submit" value="Sign UP"/>
         <a th:href="@{/login}"><input type="button" value="Sign IN"/></a>
