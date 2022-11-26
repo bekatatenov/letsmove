@@ -21,6 +21,7 @@ public class CityController {
     public ModelAndView addCity() {
         ModelAndView modelAndView = new ModelAndView("addCity");
         modelAndView.addObject("city", new City());
+
         return modelAndView;
     }
 

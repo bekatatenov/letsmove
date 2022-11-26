@@ -1,6 +1,7 @@
 package com.letsmove.entity;
 
 import com.letsmove.enums.Role;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,4 +36,5 @@ public class Users {
 
     @Column(name = "CREATED_DATE")
     private Date createdDate;
+
 }

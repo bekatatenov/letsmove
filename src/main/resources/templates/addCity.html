@@ -2,22 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <title>Add City</title>
+    <title>Add City</title>
 </head>
 <body>
-<form th:action="@{/save_city}" method="post" th:object="${city}">
-  <div><label> Название города : <input th:value="${name}" type="text" name="name" autofocus required/> </label>
-  </div>
-  <br>
-  <div><label> Информация о городе : <input th:value="${information}" type="text" name="information" autofocus required/> </label>
-  </div>
-  <br>
-  <div><label> Население : <input th:value="${population}" type="number" name="population" autofocus required/> </label></div>
-  <br>
-  <div><label> URL картинки : <input th:value="${img}" type="url" name="img"/> </label></div>
-  <br>
-  <div><input type="submit" value="Добавить"/>
-  </div>
+    <div><label> Название города : <input th:value="${name}" type="text" name="name" autofocus required/> </label>
+    </div>
+    <br>
+    <div><label> Информация о городе : <input th:value="${information}" type="text" name="information" autofocus
+                                              required/> </label>
+    </div>
+    <br>
+    <div><label> Население : <input th:value="${population}" type="number" name="population" autofocus required/>
+    </label></div>
+    <br>
+    <div><label> URL картинки : <input th:value="${img}" type="url" name="img"/> </label></div>
+    <br>
+    <div><input type="submit" value="Добавить"/>
+    </div>
 </form>
 </body>
 </html>
