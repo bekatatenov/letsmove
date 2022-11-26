@@ -50,9 +50,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
-                .antMatchers("/", "/login", "/register", "/registration","/change_password", "/forgotPassword", "/passwordRecoveryEmail", "/newPasswordUser").permitAll()
+                .antMatchers("/", "/login", "/register", "/registration","/change_password", "/forgotPassword", "/passwordRecoveryEmail", "/newPasswordUser")
+                .permitAll()
                 .antMatchers("/manager_registration", "/manager_register", "/guides_registration", "/guides_register")
-                .hasAuthority("USER").antMatchers("/save_city","/add_city").hasAuthority("ADMIN").antMatchers("/save-place", "/add_place").hasAuthority("MANAGER")
+                .hasAuthority("USER")
+                .antMatchers("/save_city","/add_city")
+                .hasAuthority("ADMIN")
+                .antMatchers("/save-place", "/add_place")
+                .hasAuthority("MANAGER")
                 .anyRequest()
                 .authenticated()
                 .and().csrf().disable()

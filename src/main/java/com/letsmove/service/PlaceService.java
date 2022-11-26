@@ -7,6 +7,8 @@ import com.letsmove.entity.Place;
 import com.letsmove.entity.Users;
 import com.letsmove.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,19 @@ public class PlaceService {
     private PlaceRepository placeRepository;
 
     @Autowired
-    private ManagerService managerService;
+    private CityService cityService;
 
-    public Place save(Place place){
+    @Autowired
+    private UserService userService;
+
+    public Place save(Place place,String cityName){
+        City city = cityService.findByName(cityName);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users user = userService.FindByLogin(auth.getName());
+        place.setUsersID(user);
+        place.setCityID(city);
         place.setCreatedDate(new Date());
+        place.setStatus(Status.NEW);
         return placeRepository.save(place);
     }
 /*

@@ -27,7 +27,7 @@ public class CityController {
 
 
     @PostMapping(value = "/save_city")
-    public String registration(@ModelAttribute(name = "city") City city) {
+    public String saveCity(@ModelAttribute(name = "city") City city) {
         try {
             this.cityService.save(city);
             return "adminMain";
