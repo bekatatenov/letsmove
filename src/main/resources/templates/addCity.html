@@ -5,11 +5,11 @@
     <title>Add City</title>
 </head>
 <body>
+<form th:action="@{/save_city}" method="post" th:object="${city}">
     <div><label> Название города : <input th:value="${name}" type="text" name="name" autofocus required/> </label>
     </div>
     <br>
-    <div><label> Информация о городе : <input th:value="${information}" type="text" name="information" autofocus
-                                              required/> </label>
+    <div><label> Информация о городе : <input th:value="${information}" type="text" name="information" autofocus required/> </label>
     </div>
     <br>
     <div><label> Население : <input th:value="${population}" type="number" name="population" autofocus required/>
