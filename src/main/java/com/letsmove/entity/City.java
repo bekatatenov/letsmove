@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "cities")
+@Table(name = "city")
 @Getter
 @Setter
 public class City {

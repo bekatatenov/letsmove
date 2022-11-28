@@ -1,5 +1,6 @@
 package com.letsmove.config;
 
+import com.letsmove.enums.Role;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/", "/login", "/register", "/registration","/change_password", "/forgotPassword", "/passwordRecoveryEmail", "/newPasswordUser").permitAll()
                 .antMatchers("/manager_registration", "/manager_register", "/guides_registration", "/guides_register")
-                .hasAuthority("USER")
+                .hasAuthority("USER").antMatchers("/save_city","/add_city").hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and().csrf().disable()
