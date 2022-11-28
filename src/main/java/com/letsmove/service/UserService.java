@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
     }
 
     public Users FindByLogin(String login) {
-        return userRepository.findFirstByLogin(login);
+        return userRepository.findByLogin(login);
     }
 
     public Users findByEmailUser(String email) {
@@ -57,5 +57,4 @@ public class UserService implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         return new User(user.getLogin(), user.getPassword(), authorities);
     }
-
 }

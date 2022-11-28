@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,7 +30,8 @@ public class UserController {
     @Autowired
     private EmailSenderService emailSenderService;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private PasswordEncoder bCryptPasswordEncoder;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -68,9 +70,13 @@ public class UserController {
 
     @PostMapping(value = "/registration")
     public String registration(@ModelAttribute(name = "user") Users user) {
-        ModelAndView model = new ModelAndView();
-        this.userService.save(user);
-        return "login";
+        try {
+            ModelAndView model = new ModelAndView();
+            this.userService.save(user);
+            return "login";
+        }catch (Exception e){
+            return "registration";
+        }
     }
 
     @RequestMapping(value = "/adminMain", method = RequestMethod.GET)
@@ -78,38 +84,34 @@ public class UserController {
         return "adminMain";
     }
 
-    @RequestMapping(value = "/change_password", method = RequestMethod.GET)
-    public ModelAndView changePassword() {
-        ModelAndView modelAndView = new ModelAndView("changePassword");
-        modelAndView.addObject("oldPassword", new String());
-        modelAndView.addObject("newPassword", new String());
-        modelAndView.addObject("newPasswordRepeat", new String());
-        return modelAndView;
-    }
     @GetMapping(value = "/forgotPassword")
     public String resetPasswordPage() {
         return "forgotPassword";
     }
+
     @PostMapping(value = "/passwordRecoveryEmail")
-    public ModelAndView getEmailForResetPassword(@RequestParam String email) throws MessagingException {
-        ModelAndView modelAndView = new ModelAndView("token");
-        Users saved = userService.findByEmailUser(email);
+    public ModelAndView getEmailForResetPassword(@RequestParam String login) throws MessagingException {
+        ModelAndView modelAndView = new ModelAndView("changePassword");
+        Users saved = userService.FindByLogin(login);
         Token token = tokenService.saveToken(saved, tokenService.makeToken());
-        emailSenderService.sendEmail(saved.getEmail(),"Восстановление пароля",String.valueOf(token.getToken()));
+        emailSenderService.sendEmail(saved.getEmail(), "Введите данный токен, чтобы сбросить ваш пароль: " + String.valueOf(token.getToken()), "Восстановление пароля");
         NewPasswordUser newPasswordUser = new NewPasswordUser();
-        newPasswordUser.setEmail(email);
+        newPasswordUser.setEmail(saved.getEmail());
         modelAndView.addObject("reset", newPasswordUser);
         return modelAndView;
     }
+
     @PostMapping(value = "/newPasswordUser")
     public String newPassword(@ModelAttribute(name = "reset") NewPasswordUser newPasswordUser) throws Exception {
         Users users = userService.findByEmailUser(newPasswordUser.getEmail());
         Token byUserAndToken = tokenService.findByUserAndToken(users, newPasswordUser.getToken());
-        if(newPasswordUser.getPassword().equals(newPasswordUser.getRepeatPassword())){
-        users.setPassword(bCryptPasswordEncoder.encode(newPasswordUser.getPassword()));
-        }else throw new Exception("Пароли не совпадают");
-        userService.save(users);
-        tokenService.deleteToken(byUserAndToken);
-        return "login";
+        if (newPasswordUser.getPassword().equals(newPasswordUser.getRepeatPassword())) {
+            users.setPassword(bCryptPasswordEncoder.encode(newPasswordUser.getPassword()));
+            userService.update(users);
+            tokenService.deleteToken(byUserAndToken);
+            return "login";
+        } else {
+            return "changePassword";
+        }
     }
 }
