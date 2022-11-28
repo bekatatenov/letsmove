@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example</title>
+</head>
+<body>
+<form th:action="@{/guides_registration}" method="post" th:object="${guides}">
+    <div><label> FIO : <input th:value="${fio}" type="text" name="fio" autofocus required/> </label></div>
+    <br>
+    <div><label> Phone Number : <input th:value="${phoneNumber}" type="number" name="phoneNumber" autofocus required/>
+    </label></div>
+    <br>
+    <div><label> IMG url : <input th:value="${img}" type="url" name="img" autofocus required/> </label></div>
+    <br>
+    <div><label> Information: <input th:value="${info}" type="text" name="info" autofocus required/> </label></div>
+    <br>
+    <div><input type="submit" value="Sign UP"/></div>
+</form>
+</body>
+</html>
