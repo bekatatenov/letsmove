@@ -22,7 +22,8 @@ public class City {
     @Column(name = "POPULATION")
     private Integer population;
 
-    @Column(columnDefinition = "nclob", name = "INFORMATION")
+    @Lob
+    @Column(name = "INFORMATION")
     private String information;
 
     @Column(name = "IMG")
