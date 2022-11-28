@@ -5,7 +5,9 @@ import com.letsmove.entity.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -17,5 +19,16 @@ public class CityService{
         city.setCreatedDate(new Date());
         return cityRepository.save(city);
     }
+    public List<String> allCityName(){
+        List<City> cities = cityRepository.findAll();
+        List<String> citiesName = new ArrayList<>();
+        for (City city:cities) {
+            citiesName.add(city.getName());
+        }
+        return citiesName;
+    }
 
+    public City findByName(String city){
+        return cityRepository.findByName(city);
+    }
 }

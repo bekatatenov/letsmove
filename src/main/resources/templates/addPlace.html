@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Add Place</title>
+</head>
+<body>
+<form th:action="@{/save_place}" method="post" th:object="${place}">
+    <div><label>Выберите город:
+        <select th:object="${cityName}" type="text" name="cityName">
+            <option th:each="city:${citiesName}">
+                <th:block th:text="${city}"></th:block>
+            </option>
+        </select> </label></div>
+    <div><label>Выберите категорию места:
+        <select th:value="${placeType}" type="text" name="placeType">
+            <option th:each="placeType:${placeTypes}">
+                <th:block th:text="${placeType}"></th:block>
+            </option>
+        </select> </label></div>
+
+    <div><label> Название места : <input th:value="${placeName}" type="text" name="placeName" autofocus required/></label></div>
+    <br>
+    <div><label> Информация: <input th:value="${info}" type="text" name="info" autofocus required/> </label></div>
+    <br>
+    <div><label> URL картинки : <input th:value="${img}" type="url" name="img"/> </label></div>
+    <br>
+    <div><label> Адрес: <input th:value="${address}" type="text" name="address" autofocus required/> </label>
+    </div>
+    <div><input type="submit" value="Добавить"/>
+    </div>
+</form>
+</body>
+</html>

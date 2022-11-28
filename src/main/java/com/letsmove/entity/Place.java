@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "place")
 @Getter
 @Setter
-public class Place{
+public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "place_id_seq")
     @SequenceGenerator(name = "place_id_seq", sequenceName = "place_id_seq", allocationSize = 1)
@@ -31,7 +31,7 @@ public class Place{
     @Column(name = "PLACE_NAME")
     private String placeName;
 
-    @Column(name = "INFO")
+    @Column(columnDefinition = "nclob", name = "INFO")
     private String info;
 
     @Column(name = "IMG")
@@ -41,11 +41,11 @@ public class Place{
     private String address;
 
     @Column(name = "STATUS")
-    @Enumerated(EnumType.STRING )
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @Column(name = "PLACE_TYPE")
-    @Enumerated(EnumType.STRING )
+    @Enumerated(EnumType.STRING)
     private PlaceType placeType;
 
     @Column(name = "CREATED_DATE")
