@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example</title>
+</head>
+<body>
+<form th:action="@{/newPasswordUser}" method="post" th:object="${user}">
+    <div><label> Token : <input th:value="${token}" type="text" name="login" autofocus required/> </label></div>
+    <br>
+    <div><label> NewPassword : <input th:value="${password}" type="password" name="password" autofocus required/> </label></div>
+    <br>
+    <div><label> Repeat password: <input th:value="${repeatPassword}" type="password" name="repeatPassword" autofocus required/> </label></div>
+    <br>
+    <div><input type="submit" value="Sign UP"/>
+        <a th:href="@{/login}"><input type="button" value="Sign IN"/></a>
+    </div>
+</form>
+</body>
+</html>

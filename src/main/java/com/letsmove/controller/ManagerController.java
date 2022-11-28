@@ -1,7 +1,6 @@
 package com.letsmove.controller;
 
 import com.letsmove.entity.Manager;
-import com.letsmove.entity.Users;
 import com.letsmove.service.ManagerService;
 import com.letsmove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class ManagerController {
 
     @RequestMapping(value = "/manager_register", method = RequestMethod.GET)
     public ModelAndView managerRegister() {
-        ModelAndView modelAndView = new ModelAndView("ManagerRegistration");
+        ModelAndView modelAndView = new ModelAndView("managerRegistration");
         modelAndView.addObject("manager", new Manager());
         return modelAndView;
     }

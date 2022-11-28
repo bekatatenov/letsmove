@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:if="${param.error} != null">
-    Login busy.
+    Login already used.
 </div>
 <form th:action="@{/registration}" method="post" th:object="${user}">
     <div><label> Login : <input th:value="${login}" type="text" name="login" autofocus required/> </label></div>

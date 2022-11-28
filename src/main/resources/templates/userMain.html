@@ -7,13 +7,16 @@
 <body>
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
+    <input type="submit" value="Выйти"/>
 </form>
 <form th:action="@{/manager_register}" method="get">
     <input type="submit" value="Стать менеджером"/>
 </form>
 <form th:action="@{/guides_register}" method="get">
     <input type="submit" value="Стать гидом"/>
+</form>
+<form th:action="@{/change_password}" method="get">
+    <input type="submit" value="Сменить пароль"/>
 </form>
 </body>
 </html>
