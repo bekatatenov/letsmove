@@ -34,6 +34,7 @@ public class Place {
     @Column(columnDefinition = "nclob", name = "INFO")
     private String info;
 
+    @Lob
     @Column(name = "IMG")
     private String img;
 
