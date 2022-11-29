@@ -16,7 +16,7 @@ public class City {
     @SequenceGenerator(name = "city_id_seq", sequenceName = "city_id_seq", allocationSize = 1)
     private Integer id;
 
-    @Column(name = "CITY_NAME")
+    @Column(name = "CITY_NAME",unique = true)
     private String name;
 
     @Column(name = "POPULATION")

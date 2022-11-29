@@ -25,6 +25,14 @@ public class CityController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/city_information", method = RequestMethod.GET)
+    public ModelAndView infoCity() {
+        ModelAndView modelAndView = new ModelAndView("main");
+        City city = cityService.findByName("Бишкек");
+        modelAndView.addObject("city",city);
+        return modelAndView;
+    }
+
 
     @PostMapping(value = "/save_city")
     public String saveCity(@ModelAttribute(name = "city") City city) {
