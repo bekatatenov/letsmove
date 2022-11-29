@@ -11,5 +11,5 @@ import java.util.List;
 public interface CityRepository extends JpaRepository<City,Integer> {
     @Override
     List<City> findAll();
-    City findByName(String name);
+    City findCityByName(String name);
 }

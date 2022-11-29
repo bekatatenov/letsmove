@@ -1,6 +1,5 @@
 package com.letsmove.entity;
 
-
 import com.letsmove.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +17,14 @@ public class Tour {
     @SequenceGenerator(name = "tours_id_seq", sequenceName = "tours_id_seq", allocationSize = 1)
     private Integer id;
 
+    @Column(name = "TOUR_NAME")
+    private String nameTour;
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "guides_id")
+    @JoinColumn(name = "GUIDES_ID")
     private Guides guidesID;
 
+    @Lob
     @Column(name = "INFO")
     private String info;
 

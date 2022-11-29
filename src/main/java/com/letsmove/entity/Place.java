@@ -31,10 +31,10 @@ public class Place {
     @Column(name = "PLACE_NAME")
     private String placeName;
 
-    @Column(columnDefinition = "nclob", name = "INFO")
+    @Lob
+    @Column(name = "INFO")
     private String info;
 
-    @Lob
     @Column(name = "IMG")
     private String img;
 

@@ -29,6 +29,6 @@ public class CityService{
     }
 
     public City findByName(String city){
-        return cityRepository.findByName(city);
+        return cityRepository.findCityByName(city);
     }
 }

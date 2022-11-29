@@ -74,7 +74,7 @@ public class UserController {
             ModelAndView model = new ModelAndView();
             this.userService.save(user);
             return "login";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "registration";
         }
     }
@@ -102,15 +102,19 @@ public class UserController {
     }
 
     @PostMapping(value = "/newPasswordUser")
-    public String newPassword(@ModelAttribute(name = "reset") NewPasswordUser newPasswordUser) throws Exception {
-        Users users = userService.findByEmailUser(newPasswordUser.getEmail());
-        Token byUserAndToken = tokenService.findByUserAndToken(users, newPasswordUser.getToken());
-        if (newPasswordUser.getPassword().equals(newPasswordUser.getRepeatPassword())) {
-            users.setPassword(bCryptPasswordEncoder.encode(newPasswordUser.getPassword()));
-            userService.update(users);
-            tokenService.deleteToken(byUserAndToken);
-            return "login";
-        } else {
+    public String newPassword(@ModelAttribute(name = "reset") NewPasswordUser newPasswordUser) {
+        try {
+            Users users = userService.findByEmailUser(newPasswordUser.getEmail());
+            Token byUserAndToken = tokenService.findByUserAndToken(users, newPasswordUser.getToken());
+            if (newPasswordUser.getPassword().equals(newPasswordUser.getRepeatPassword())) {
+                users.setPassword(bCryptPasswordEncoder.encode(newPasswordUser.getPassword()));
+                userService.update(users);
+                tokenService.deleteToken(byUserAndToken);
+                return "login";
+            } else {
+                return "changePassword";
+            }
+        } catch (Exception e) {
             return "changePassword";
         }
     }

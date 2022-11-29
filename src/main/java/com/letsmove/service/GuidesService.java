@@ -27,4 +27,8 @@ public class GuidesService {
         userService.update(users);
         return guidesRepository.save(guides);
     }
+
+    public Guides findByUserID(Users users){
+        return guidesRepository.findByUsersID(users);
+    }
 }
