@@ -2,6 +2,7 @@ package com.letsmove.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,13 +17,14 @@ public class City {
     @SequenceGenerator(name = "city_id_seq", sequenceName = "city_id_seq", allocationSize = 1)
     private Integer id;
 
-    @Column(name = "CITY_NAME",unique = true)
+    @Column(name = "CITY_NAME", unique = true)
     private String name;
 
     @Column(name = "POPULATION")
     private Integer population;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "INFORMATION")
     private String information;
 

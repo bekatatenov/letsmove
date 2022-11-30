@@ -6,12 +6,14 @@
 </head>
 <body>
 <form th:action="@{/save_place}" method="post" th:object="${place}">
+
     <div><label>Выберите город:
         <select th:object="${cityName}" type="text" name="cityName">
             <option th:each="city:${citiesName}">
                 <th:block th:text="${city}"></th:block>
             </option>
         </select> </label></div>
+
     <div><label>Выберите категорию места:
         <select th:value="${placeType}" type="text" name="placeType">
             <option th:each="placeType:${placeTypes}">
