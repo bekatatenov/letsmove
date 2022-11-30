@@ -5,6 +5,7 @@ import com.letsmove.enums.PlaceType;
 import com.letsmove.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class Place {
     private String placeName;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "INFO")
     private String info;
 

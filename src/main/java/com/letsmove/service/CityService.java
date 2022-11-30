@@ -4,6 +4,7 @@ import com.letsmove.dao.CityRepository;
 import com.letsmove.entity.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +29,7 @@ public class CityService{
         return citiesName;
     }
 
+    @Transactional
     public City findByName(String city){
         return cityRepository.findCityByName(city);
     }

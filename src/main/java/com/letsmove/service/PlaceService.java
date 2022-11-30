@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +27,8 @@ public class PlaceService {
     @Autowired
     private UserService userService;
 
-    public void save(Place place,String cityName){
+    @Transactional
+    public void save(Place place, String cityName) {
         City city = cityService.findByName(cityName);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users user = userService.FindByLogin(auth.getName());
@@ -36,14 +38,16 @@ public class PlaceService {
         place.setStatus(Status.NEW);
         placeRepository.save(place);
     }
-    public List<Place> getAllNewPlace(){
+
+    public List<Place> getAllNewPlace() {
         return placeRepository.findAllByStatus(Status.NEW);
     }
-    public void updatePlaceStatus(Integer id,String status){
+
+    public void updatePlaceStatus(Integer id, String status) {
         Place place = placeRepository.findPlaceById(id);
-        if(status.equals("ACTIVE")){
+        if (status.equals("ACTIVE")) {
             place.setStatus(Status.ACTIVE);
-        }else if(status.equals("UN_ACTIVE")){
+        } else if (status.equals("UN_ACTIVE")) {
             place.setStatus(Status.UN_ACTIVE);
         }
         placeRepository.save(place);

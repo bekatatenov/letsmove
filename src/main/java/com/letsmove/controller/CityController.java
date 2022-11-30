@@ -21,7 +21,6 @@ public class CityController {
     public ModelAndView addCity() {
         ModelAndView modelAndView = new ModelAndView("addCity");
         modelAndView.addObject("city", new City());
-
         return modelAndView;
     }
 
@@ -38,6 +37,7 @@ public class CityController {
     public String saveCity(@ModelAttribute(name = "city") City city) {
         try {
             this.cityService.save(city);
+            System.out.println(city.getInformation());
             return "adminMain";
         }catch (Exception e){
             return "addCity";
