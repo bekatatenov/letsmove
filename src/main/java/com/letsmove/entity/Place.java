@@ -33,7 +33,6 @@ public class Place {
     private String placeName;
 
     @Lob
-    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "INFO")
     private String info;
 

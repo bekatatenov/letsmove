@@ -55,18 +55,15 @@ public class PlaceController {
         ArrayList<Place> allNewPlace = (ArrayList<Place>) placeService.getAllNewPlace();
         modelAndView.addObject("allNewPlace", allNewPlace);
         ArrayList<Status> status = new ArrayList<Status>(Arrays.asList(Status.values()));
-        modelAndView.addObject("statuses",status);
+        modelAndView.addObject("statuses", status);
         return modelAndView;
     }
 
 
     @PostMapping(value = "/save_active_place")
     public String addActivePlace(@RequestParam(name = "placeId") Integer placeId, @RequestParam(name = "status") String status) {
-        try {
-            placeService.updatePlaceStatus(placeId, status);
-            return "adminMain";
-        } catch (Exception e) {
-            return "addPlace";
-        }
+        placeService.updatePlaceStatus(placeId, status);
+        return "adminMain";
+
     }
 }

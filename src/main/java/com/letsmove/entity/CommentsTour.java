@@ -25,9 +25,9 @@ public class CommentsTour {
     @JoinColumn(name = "TOUR_ID")
     private Tour tourID;
 
+    @Lob
     @Column(name = "COMMENT")
     private String comment;
-
 
     @Column(name = "CREATED_DATE")
     private Date createdDate;

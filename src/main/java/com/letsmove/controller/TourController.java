@@ -1,8 +1,11 @@
 package com.letsmove.controller;
 
+import com.letsmove.entity.CommentsTour;
 import com.letsmove.entity.Place;
 import com.letsmove.entity.Tour;
 import com.letsmove.enums.PlaceType;
+import com.letsmove.enums.Status;
+import com.letsmove.service.CommentsTourService;
 import com.letsmove.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,8 @@ import java.util.List;
 public class TourController {
     @Autowired
     private TourService tourService;
+    @Autowired
+    private CommentsTourService commentsTourService;
 
     @RequestMapping(value = "/add_tour", method = RequestMethod.GET)
     public ModelAndView addTour() {
@@ -37,4 +42,47 @@ public class TourController {
             return "addTour";
         }
     }
+
+    @RequestMapping(value = "/check_tour", method = RequestMethod.GET)
+    public ModelAndView checkTour() {
+        ModelAndView modelAndView = new ModelAndView("checkTour");
+        ArrayList<Tour> allNewTour = tourService.getAllNewTour();
+        modelAndView.addObject("allNewTour", allNewTour);
+        ArrayList<Status> status = new ArrayList<Status>(Arrays.asList(Status.values()));
+        modelAndView.addObject("statuses", status);
+        return modelAndView;
+    }
+
+
+    @PostMapping(value = "/save_active_tour")
+    public String addActiveTour(@RequestParam(name = "tourId") Integer tourId, @RequestParam(name = "status") String status) {
+        tourService.updateTourStatus(tourId, status);
+        return "checkTour";
+    }
+
+    @RequestMapping(value = "/get_all_tour", method = RequestMethod.GET)
+    public ModelAndView getAllTour() {
+        ModelAndView modelAndView = new ModelAndView("AllTours");
+        ArrayList<Tour> allActiveTour = tourService.getAllActiveTour();
+        modelAndView.addObject("allActiveTour", allActiveTour);
+        return modelAndView;
+    }
+
+
+    @PostMapping(value = "/book_tour")
+    public ModelAndView getBookTour(@RequestParam(name = "tourId") Integer tourId) {
+        ModelAndView modelAndView = new ModelAndView("getTour");
+        Tour tour = tourService.getTourById(tourId);
+        CommentsTour commentsTour = new CommentsTour();
+        modelAndView.addObject("tour",tour);
+        modelAndView.addObject("comments",commentsTour);
+        modelAndView.addObject("allComments",commentsTourService.getAllCommentsTour());
+        return modelAndView;
+    }
+//    @PostMapping(value = "/getTour")
+//    public String getTour(@RequestParam(name = "tourId") Integer id,@ModelAttribute(name = "comment") CommentsTour commentsTour){
+//
+//    }
+
+
 }

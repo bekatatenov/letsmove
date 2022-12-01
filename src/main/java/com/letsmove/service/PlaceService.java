@@ -27,7 +27,9 @@ public class PlaceService {
     @Autowired
     private UserService userService;
 
-    @Transactional
+    @Autowired
+    private EmailSenderService emailSenderService;
+
     public void save(Place place, String cityName) {
         City city = cityService.findByName(cityName);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -45,10 +47,15 @@ public class PlaceService {
 
     public void updatePlaceStatus(Integer id, String status) {
         Place place = placeRepository.findPlaceById(id);
+        Users users = place.getUsersID();
         if (status.equals("ACTIVE")) {
             place.setStatus(Status.ACTIVE);
+            emailSenderService.sendEmail(users.getEmail(),"Поздравляю, по нашим взглядам ваше заведение подходит для размещения на нашем сайте. \n Поэтому вам одобренно в доступе. \n Ваше заведение уже размещено на сайте :)","Фидбек на заявку");
+
         } else if (status.equals("UN_ACTIVE")) {
             place.setStatus(Status.UN_ACTIVE);
+            emailSenderService.sendEmail(users.getEmail(),"К сожалению, по нашим взглядам ваше заведение не подходит для размещения на нашем сайте. \n Поэтому вам отказано в доступе. \n Попробуйте переделать вашу заявку и отправить повторно :)","Фидбек на заявку");
+
         }
         placeRepository.save(place);
     }

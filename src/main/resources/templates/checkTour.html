@@ -2,27 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Check Place</title>
+    <title>Check Tour</title>
 </head>
 <body>
+<form th:action="@{/adminMain}" method="get">
+    <h1><input type="submit" value="<"/></h1>
+</form>
 <table>
     <tr>
         <th>ID</th>
-        <th>PLACE NAME</th>
-        <th>PLACE TYPE</th>
-        <th>ADDRESS</th>
+        <th>TOUR NAME</th>
         <th>CREATED DATE</th>
         <th>STATUS</th>
         <th>COMMIT</th>
     </tr>
-    <tr th:each="place:${allNewPlace}">
-        <td th:text="${place.id}"></td>
-        <td th:text="${place.placeName}"></td>
-        <td th:text="${place.placeType}"></td>
-        <td th:text="${place.address}"></td>
-        <td th:text="${place.createdDate}"></td>
-        <form th:action="@{/save_active_place}" method="post">
-            <input th:value="${place.id}" type="number" hidden="hidden" name="placeId"/>
+    <tr th:each="tour:${allNewTour}">
+        <td th:text="${tour.getId()}"></td>
+        <td th:text="${tour.getNameTour()}"></td>
+        <td th:text="${tour.getCreatedDate()}"></td>
+        <form th:action="@{/save_active_tour}" method="post">
+            <input th:value="${tour.getId()}" type="number" hidden="hidden" name="tourId"/>
             <td><select th:object="${status}" type="text" name="status">
                 <option th:each="status:${statuses}">
                     <th:block th:text="${status}"></th:block>
@@ -30,7 +29,7 @@
             </select>>
             </td>
             <td>
-            <input type="submit" value="Send"/>
+                <input type="submit" value="Send"/>
             </td>
         </form>
     </tr>

@@ -24,6 +24,7 @@ public class CommentsPlace {
     @JoinColumn(name = "PLACE_ID")
     private Place placeID;
 
+    @Lob
     @Column(name = "COMMENT")
     private String comment;
 
