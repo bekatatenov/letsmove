@@ -16,107 +16,82 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>
+    <link rel="icon" type="image/png" href="/images/icons/favicon.ico"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../static/util.css">
-    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <!--= <link rel="stylesheet" type="text/css" href="/static/util.css"> =-->
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
     <!--===============================================================================================-->
 </head>
 <body>
-<div th:if="${param.error} != null">
-    Login already used.
+
+<div hidden th:if="${param.error} !=null">
+    Данный логин уже используется
 </div>
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100">
-            <div class="login100-pic js-tilt" data-tilt>
-                <img src="images/img-01.png" alt="IMG">
+
+<form th:action="@{/registration}" method="post" th:object="${user}">
+    <section class="vh-100 bg-image"
+             style="background-image: url('https://www.womenbuildingaustralia.com.au/sites/default/files/images/Poly_BG_Grad%20%281%29_0_1.png');">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card" style="border-radius: 15px;">
+                            <div class="card-body p-5">
+                                <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+                                <form>
+
+                                    <div class="form-outline mb-4">
+                                        <input th:value="${login}" type="text" name="login"
+                                               id="form3Example1cg"
+                                               class="form-control form-control-lg"/>
+                                        <label class="form-label" for="form3Example1cg">Login</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input th:value="${email}" type="email" name="email"
+                                               id="form3Example3cg"
+                                               class="form-control form-control-lg"/>
+                                        <label class="form-label" for="form3Example3cg">Email</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input th:value="${password}" type="password" name="password"
+                                               id="form3Example4cg"
+                                               class="form-control form-control-lg"/>
+                                        <label class="form-label" for="form3Example4cg">Password</label>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" value="SIGN UP"
+                                                class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+                                            SIGN UP
+                                        </button>
+
+                                    </div>
+
+                                    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a
+                                            th:href="@{/login}"
+                                            class="fw-bold text-body"><u>Login
+                                        here</u></a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <form class="login100-form validate-form">
-					<span class="login100-form-title">
-						Регистрация
-					</span>
-                <form th:action="@{/registration}" method="post" th:object="${user}">
-                    <div class="wrap-input100 validate-input" data-validate="Login is required"><label> Login : <input
-                            th:value="${login}" type="text" name="login" autofocus required/>
-                    </label>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: abc@gmail.com">
-                        <label> Email : <input class="input100" th:value="${email}" type="email" name="email"
-                                               placeholder="Email" autofocus required/> </label>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-                    </div>
         </div>
-        <div class="wrap-input100 validate-input" data-validate="Password is required"><label> Password: <input
-                class="input100" th:value="${password}" type="password" name="password" placeholder="password" size="8"
-                autofocus
-                required/> </label></div>
-        <span class="focus-input100"></span>
-        <span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-        <div class="container-login100-form-btn">
-            <button class="login100-form-btn">
-                Login
-            </button>
-        </div>
-
-        <div class="text-center p-t-12">
-						<span class="txt1">
-							Забыли
-						</span>
-            <a class="txt2" href="#">
-                Пароль ?
-            </a>
-        </div>
-
-        <div class="text-center p-t-136">
-            <a class="txt2" href="#">
-                Создать аккаунт
-                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-            </a>
-        </div>
-    </div>
-    <div><input type="submit" value="Sign UP"/>
-        <a th:href="@{/login}"><input type="button" value="Sign IN"/></a>
-    </div>
-    </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-            crossorigin="anonymous"></script>
-
-    <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="../vendor/bootstrap/js/popper.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="../vendor/select2/select2.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="../vendor/tilt/tilt.jquery.min.js"></script>
-    <script>
-        $('.js-tilt').tilt({
-            scale: 1.1
-        })
-    </script>
-    <!--===============================================================================================-->
-    <script src="../js/main.js"></script>
+    </section>
+</form>
 </body>
 </html>
