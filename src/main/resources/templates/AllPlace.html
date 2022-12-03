@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>All Place</title>
+</head>
+<body>
+<table>
+  <tr>
+    <th>PLACE NAME</th>
+    <th>TYPE</th>
+    <th>ADDRESS</th>
+    <th></th>
+  </tr>
+  <tr th:each="place:${allActivePlace}">
+    <td th:text="${place.getPlaceName()}"></td>
+    <td th:text="${place.getPlaceType()}"></td>
+    <td th:text="${place.getAddress()}"></td>
+    <form th:action="@{/look_place}" method="get">
+      <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeId"/>
+      <td>
+        <input type="submit" value="Подробнее"/>
+      </td>
+    </form>
+  </tr>
+</table>
+</body>
+</html>

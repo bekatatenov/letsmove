@@ -1,13 +1,12 @@
 package com.letsmove.controller;
 
 import com.letsmove.config.SecurityConfiguration;
-import com.letsmove.entity.City;
-import com.letsmove.entity.Place;
-import com.letsmove.entity.Users;
+import com.letsmove.entity.*;
 import com.letsmove.enums.PlaceType;
 import com.letsmove.enums.Role;
 import com.letsmove.enums.Status;
 import com.letsmove.service.CityService;
+import com.letsmove.service.CommentsPlaceService;
 import com.letsmove.service.PlaceService;
 import com.letsmove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,8 @@ public class PlaceController {
     private CityService cityService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private CommentsPlaceService commentsPlaceService;
     @RequestMapping(value = "/add_place", method = RequestMethod.GET)
     public ModelAndView addPlace() {
         List<String> citiesName = cityService.allCityName();
@@ -63,7 +63,31 @@ public class PlaceController {
     @PostMapping(value = "/save_active_place")
     public String addActivePlace(@RequestParam(name = "placeId") Integer placeId, @RequestParam(name = "status") String status) {
         placeService.updatePlaceStatus(placeId, status);
-        return "adminMain";
+        return "redirect:/check_place";
 
+    }
+
+    @RequestMapping(value = "/get_all_place", method = RequestMethod.GET)
+    public ModelAndView getAllPlace() {
+        ModelAndView modelAndView = new ModelAndView("AllPlace");
+        ArrayList<Place> allActivePlace = (ArrayList<Place>) placeService.getAllActivePlace();
+        modelAndView.addObject("allActivePlace", allActivePlace);
+        return modelAndView;
+    }
+    @GetMapping(value = "/look_place")
+    public ModelAndView getPlace(@RequestParam(name = "placeId") Integer placeId) {
+        ModelAndView modelAndView = new ModelAndView("getPlace");
+        Place place = placeService.getPlaceById(placeId);
+        CommentsPlace commentsPlace = new CommentsPlace();
+        commentsPlace.setPlaceID(place);
+        modelAndView.addObject("place",place);
+        modelAndView.addObject("commentsPlace",commentsPlace);
+        modelAndView.addObject("allComments",commentsPlaceService.getAllCommentsPlace(place));
+        return modelAndView;
+    }
+    @PostMapping(value = "/change_rating")
+    public String changeRating(@RequestParam(name = "placeId") Integer placeId,@RequestParam(name = "rating") Integer rating){
+        placeService.changeRating(placeId,rating);
+        return "redirect:/look_place?placeId="+placeId;
     }
 }

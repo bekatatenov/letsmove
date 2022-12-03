@@ -4,9 +4,7 @@ import com.letsmove.entity.Users;
 import com.letsmove.dao.UserRepository;
 import com.letsmove.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,7 +31,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public Users FindByLogin(String login) {
+    public Users findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
 

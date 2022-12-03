@@ -2,7 +2,6 @@ package com.letsmove.service;
 
 import com.letsmove.dao.GuidesRepository;
 import com.letsmove.entity.Guides;
-import com.letsmove.entity.Manager;
 import com.letsmove.entity.Users;
 import com.letsmove.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class GuidesService {
 
     public Guides save(Guides guides) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users users = userService.FindByLogin(auth.getName());
+        Users users = userService.findByLogin(auth.getName());
         guides.setUsersID(users);
         guides.setAllTour(0);
         users.setRole(Role.GUIDE);

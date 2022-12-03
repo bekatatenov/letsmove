@@ -14,8 +14,6 @@ import java.util.List;
 @Repository
 public interface TourRepository extends JpaRepository<Tour, Integer> {
     @Transactional
-    Tour findPlaceById(Integer id);
-    @Transactional
     ArrayList<Tour> findAllByStatus(Status status);
 
     @Transactional

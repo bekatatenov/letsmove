@@ -2,16 +2,12 @@ package com.letsmove.service;
 
 import com.letsmove.dao.ManagerRepository;
 import com.letsmove.entity.Manager;
-import com.letsmove.entity.Place;
 import com.letsmove.entity.Users;
 import com.letsmove.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class ManagerService {
@@ -22,7 +18,7 @@ public class ManagerService {
 
     public Manager save(Manager manager) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users users = userService.FindByLogin(auth.getName());
+        Users users = userService.findByLogin(auth.getName());
         manager.setUsersID(users);
         users.setRole(Role.MANAGER);
         userService.update(users);
