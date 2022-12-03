@@ -29,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
     <!--= <link rel="stylesheet" type="text/css" href="/static/util.css"> =-->
-    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <!--===============================================================================================-->
 </head>
 <body>
@@ -39,6 +39,7 @@
 </div>
 
 <form th:action="@{/registration}" method="post" th:object="${user}">
+
     <section class="vh-100 bg-image"
              style="background-image: url('https://www.womenbuildingaustralia.com.au/sites/default/files/images/Poly_BG_Grad%20%281%29_0_1.png');">
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -52,21 +53,21 @@
                                 <form>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${login}" type="text" name="login"
+                                        <input th:value="${login}" type="text" name="login" maxlength="30" autofocus required
                                                id="form3Example1cg"
                                                class="form-control form-control-lg"/>
                                         <label class="form-label" for="form3Example1cg">Login</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${email}" type="email" name="email"
+                                        <input th:value="${email}" type="email" name="email" autofocus required
                                                id="form3Example3cg"
                                                class="form-control form-control-lg"/>
                                         <label class="form-label" for="form3Example3cg">Email</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${password}" type="password" name="password"
+                                        <input th:value="${password}" type="password" name="password" minlength="8" maxlength="30" autofocus required
                                                id="form3Example4cg"
                                                class="form-control form-control-lg"/>
                                         <label class="form-label" for="form3Example4cg">Password</label>
