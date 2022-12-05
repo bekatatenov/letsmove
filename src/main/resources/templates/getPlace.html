@@ -9,10 +9,10 @@
 <form th:action="@{/change_rating}" method="post">
   <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeId"/>
   <h1><th:block th:text="${place.getPlaceName()}"></th:block> </h1>
-  <h2>rating:<th:block th:text="${place.getRating()}"></th:block> </h2>
+  <h2>rating:<th:block th:text="${place.getRating()}" ></th:block> </h2>
   <h3>place type:<th:block th:text="${place.getPlaceType()}"></th:block> </h3>
   <h3>place address:<th:block th:text="${place.getAddress()}"></th:block> </h3>
-  <img th:src="${place.getImg()}">
+  <img th:src="${place.getImg()}" width="300" height="300">
   <p><th:block th:text="${place.getInfo()}"></th:block></p>
   <label>Рейтинг :
     <select th:value="${rating}" type="number" name="rating">
@@ -25,13 +25,24 @@
   </label>
   <input type="submit" value="отправить"/>
 </form>
-<form th:action="@{/save_place_comment}" method="post" th:object="${commentsPlace}">
+<form th:action="@{/save_tour_comment}" method="post" th:object="${commentsPlace}">
   <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeID"/>
   <label> <h3>Комментарий :</h3>
     <textarea th:value="${commentsPlace.comment}" type="text" name="comment" cols="25" rows="3"></textarea></label>
   <br>
   <div><input type="reset" value="сброс">
     <input type="submit" value="отправить"/></div>
+</form>
+<h2>Комментарии: </h2>
+<form th:action="@{/look_place}" method="get" th:object="${allComments}">
+  <div th:each="comment:${allComments}">
+    <div th:each="author:${allCommentsAuthor}">
+      <div th:if="${comment.getUsersID()}==${author}">
+      <h3><th:block th:text="${author.getLogin()}"></th:block></h3>
+      <H4><th:block th:text="${comment.getComment()}"></th:block></H4>
+      </div>
+    </div>
+  </div>
 </form>
 </table>
 </body>

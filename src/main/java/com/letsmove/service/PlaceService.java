@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,9 @@ public class PlaceService {
         City city = cityService.findByName(cityName);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users user = userService.findByLogin(auth.getName());
+        if(place.getImg() == null){
+            place.setImg("https://drive.google.com/file/d/1qsOCJ1IZbAf0u_OCvEM1jseCCQLJnYI6/view?usp=sharing");
+        }
         place.setUsersID(user);
         place.setCityID(city);
         place.setCreatedDate(new Date());
@@ -72,8 +76,17 @@ public class PlaceService {
         if (place.getRating() == 0) {
             place.setRating(rating.doubleValue());
         } else {
-            place.setRating((place.getRating() + rating) / 2);
+            double ratingNum = (place.getRating() + rating) / 2;
+            place.setRating(round(ratingNum,1));
         }
         placeRepository.save(place);
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }

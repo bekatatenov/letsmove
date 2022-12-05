@@ -33,6 +33,9 @@ public class TourService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users user = userService.findByLogin(auth.getName());
         Guides guides = guidesService.findByUserID(user);
+        if(tour.getImg() == null){
+            tour.setImg("https://drive.google.com/file/d/1qsOCJ1IZbAf0u_OCvEM1jseCCQLJnYI6/view?usp=sharing");
+        }
         tour.setGuidesID(guides);
         tour.setCreatedDate(new Date());
         tour.setStatus(Status.NEW);

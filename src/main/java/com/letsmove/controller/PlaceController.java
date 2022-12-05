@@ -31,14 +31,22 @@ public class PlaceController {
     private UserService userService;
     @Autowired
     private CommentsPlaceService commentsPlaceService;
+
     @RequestMapping(value = "/add_place", method = RequestMethod.GET)
     public ModelAndView addPlace() {
         List<String> citiesName = cityService.allCityName();
-        ArrayList<PlaceType> placeTypes = new ArrayList<PlaceType>(Arrays.asList(PlaceType.values()));
         ModelAndView modelAndView = new ModelAndView("addPlace");
-        modelAndView.addObject("place", new Place());
-        modelAndView.addObject("citiesName", citiesName);
-        modelAndView.addObject("placeTypes", placeTypes);
+        if (authenticatedUser().getRole().equals(Role.ADMIN)) {
+            ArrayList<PlaceType> placeTypes = new ArrayList<PlaceType>(Arrays.asList(PlaceType.values()));
+            modelAndView.addObject("place", new Place());
+            modelAndView.addObject("citiesName", citiesName);
+            modelAndView.addObject("placeTypes", placeTypes);
+        } else {
+            ArrayList<PlaceType> placeTypes = new ArrayList<PlaceType>(Arrays.asList(PlaceType.CAFE, PlaceType.HOTEL, PlaceType.MARKET, PlaceType.SHOPPING_CENTER));
+            modelAndView.addObject("place", new Place());
+            modelAndView.addObject("citiesName", citiesName);
+            modelAndView.addObject("placeTypes", placeTypes);
+        }
         return modelAndView;
     }
 
@@ -46,7 +54,11 @@ public class PlaceController {
     @PostMapping(value = "/save_place")
     public String savePlace(@ModelAttribute(name = "place") Place place, @RequestParam(name = "cityName") String cityName) {
         placeService.save(place, cityName);
-        return "managerMain";
+        if (authenticatedUser().getRole().equals(Role.ADMIN)) {
+            return "adminMain";
+        } else {
+            return "managerMain";
+        }
     }
 
     @RequestMapping(value = "/check_place", method = RequestMethod.GET)
@@ -74,20 +86,34 @@ public class PlaceController {
         modelAndView.addObject("allActivePlace", allActivePlace);
         return modelAndView;
     }
+
     @GetMapping(value = "/look_place")
     public ModelAndView getPlace(@RequestParam(name = "placeId") Integer placeId) {
         ModelAndView modelAndView = new ModelAndView("getPlace");
         Place place = placeService.getPlaceById(placeId);
         CommentsPlace commentsPlace = new CommentsPlace();
+        ArrayList<CommentsPlace> commentsPlaces = (ArrayList<CommentsPlace>) commentsPlaceService.getAllCommentsPlace(place);
+        ArrayList<Users> users = new ArrayList<>();
         commentsPlace.setPlaceID(place);
-        modelAndView.addObject("place",place);
-        modelAndView.addObject("commentsPlace",commentsPlace);
-        modelAndView.addObject("allComments",commentsPlaceService.getAllCommentsPlace(place));
+        modelAndView.addObject("place", place);
+        modelAndView.addObject("commentsPlace", commentsPlace);
+        modelAndView.addObject("allComments", commentsPlaces);
+        for (CommentsPlace c:commentsPlaces) {
+            users.add(c.getUsersID());
+        }
+        modelAndView.addObject("allCommentsAuthor",users);
         return modelAndView;
     }
+
     @PostMapping(value = "/change_rating")
-    public String changeRating(@RequestParam(name = "placeId") Integer placeId,@RequestParam(name = "rating") Integer rating){
-        placeService.changeRating(placeId,rating);
-        return "redirect:/look_place?placeId="+placeId;
+    public String changeRating(@RequestParam(name = "placeId") Integer placeId, @RequestParam(name = "rating") Integer rating) {
+        placeService.changeRating(placeId, rating);
+        return "redirect:/look_place?placeId=" + placeId;
+    }
+
+    public Users authenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Users user = userService.findByLogin(authentication.getName());
+        return user;
     }
 }
