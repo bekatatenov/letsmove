@@ -26,17 +26,21 @@
     <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
     <!--= <link rel="stylesheet" type="text/css" href="/static/util.css"> =-->
-    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <!--===============================================================================================-->
 </head>
 <body>
 
 <div hidden th:if="${param.error} != null">
-    Invalid username and password.
+    <div class="alert alert-danger">Invalid username or
+        password.
+    </div>
 </div>
+
 <div hidden th:if="${param.logout} != null">
-    You have been logged out.
+    <div class="alert alert-info">You have been logged out.</div>
 </div>
+
 
 <form th:action="@{/login}" method="post">
     <section class="vh-100 bg-image"
@@ -51,14 +55,14 @@
                                 <form>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${login}" type="text" name="login"
+                                        <input th:value="${login}" type="text" name="login" autofocus required
                                                id="form3Example1cg"
                                                class="form-control form-control-lg"/>
                                         <label class="form-label" for="form3Example1cg">Login</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${password}" type="password" name="password"
+                                        <input th:value="${password}" type="password" name="password" autofocus required
                                                id="form3Example4cg"
                                                class="form-control form-control-lg"/>
                                         <label class="form-label" for="form3Example4cg">Password</label>
@@ -76,6 +80,10 @@
                                             th:href="@{/forgotPassword}">
                                         <input type="button" value="Forgot Password?"
                                                class="fw-bold text-body"><u>Forgot Password?</u></a></p>
+                                    <p class="text-center text-muted mt-5 mb-0">Don't have an account yet? &nbsp;<a
+                                            th:href="@{/register}"
+                                            class="fw-bold text-body"><u>Registration
+                                        here</u></a></p>
                                 </form>
                             </div>
                         </div>
