@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,12 +31,17 @@ public class PlaceService {
     public void save(Place place, String cityName) {
         City city = cityService.findByName(cityName);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users user = userService.FindByLogin(auth.getName());
+        Users user = userService.findByLogin(auth.getName());
         place.setUsersID(user);
         place.setCityID(city);
         place.setCreatedDate(new Date());
         place.setStatus(Status.NEW);
+        place.setRating(0.0);
         placeRepository.save(place);
+    }
+
+    public List<Place> getAllActivePlace() {
+        return placeRepository.findAllByStatus(Status.ACTIVE);
     }
 
     public List<Place> getAllNewPlace() {
@@ -50,12 +53,26 @@ public class PlaceService {
         Users users = place.getUsersID();
         if (status.equals("ACTIVE")) {
             place.setStatus(Status.ACTIVE);
-            emailSenderService.sendEmail(users.getEmail(),"Поздравляю, по нашим взглядам ваше заведение подходит для размещения на нашем сайте. \n Поэтому вам одобренно в доступе. \n Ваше заведение уже размещено на сайте :)","Фидбек на заявку");
+            emailSenderService.sendEmail(users.getEmail(), "Поздравляю, по нашим взглядам ваше заведение подходит для размещения на нашем сайте. \n Поэтому вам одобренно в доступе. \n Ваше заведение уже размещено на сайте :)", "Фидбек на заявку");
 
         } else if (status.equals("UN_ACTIVE")) {
             place.setStatus(Status.UN_ACTIVE);
-            emailSenderService.sendEmail(users.getEmail(),"К сожалению, по нашим взглядам ваше заведение не подходит для размещения на нашем сайте. \n Поэтому вам отказано в доступе. \n Попробуйте переделать вашу заявку и отправить повторно :)","Фидбек на заявку");
+            emailSenderService.sendEmail(users.getEmail(), "К сожалению, по нашим взглядам ваше заведение не подходит для размещения на нашем сайте. \n Поэтому вам отказано в доступе. \n Попробуйте переделать вашу заявку и отправить повторно :)", "Фидбек на заявку");
 
+        }
+        placeRepository.save(place);
+    }
+
+    public Place getPlaceById(Integer id) {
+        return placeRepository.findPlaceById(id);
+    }
+
+    public void changeRating(Integer placeId, Integer rating) {
+        Place place = placeRepository.findPlaceById(placeId);
+        if (place.getRating() == 0) {
+            place.setRating(rating.doubleValue());
+        } else {
+            place.setRating((place.getRating() + rating) / 2);
         }
         placeRepository.save(place);
     }

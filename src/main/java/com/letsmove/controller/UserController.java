@@ -7,9 +7,6 @@ import com.letsmove.service.EmailSenderService;
 import com.letsmove.service.TokenService;
 import com.letsmove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +89,7 @@ public class UserController {
     @PostMapping(value = "/passwordRecoveryEmail")
     public ModelAndView getEmailForResetPassword(@RequestParam String login) throws MessagingException {
         ModelAndView modelAndView = new ModelAndView("changePassword");
-        Users saved = userService.FindByLogin(login);
+        Users saved = userService.findByLogin(login);
         Token token = tokenService.saveToken(saved, tokenService.makeToken());
         emailSenderService.sendEmail(saved.getEmail(), "Введите данный токен, чтобы сбросить ваш пароль: " + String.valueOf(token.getToken()), "Восстановление пароля");
         NewPasswordUser newPasswordUser = new NewPasswordUser();

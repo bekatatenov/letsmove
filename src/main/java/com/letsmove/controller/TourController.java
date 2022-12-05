@@ -57,7 +57,7 @@ public class TourController {
     @PostMapping(value = "/save_active_tour")
     public String addActiveTour(@RequestParam(name = "tourId") Integer tourId, @RequestParam(name = "status") String status) {
         tourService.updateTourStatus(tourId, status);
-        return "checkTour";
+        return "redirect:/check_tour";
     }
 
     @RequestMapping(value = "/get_all_tour", method = RequestMethod.GET)
@@ -69,20 +69,20 @@ public class TourController {
     }
 
 
-    @PostMapping(value = "/book_tour")
+    @GetMapping(value = "/book_tour")
     public ModelAndView getBookTour(@RequestParam(name = "tourId") Integer tourId) {
         ModelAndView modelAndView = new ModelAndView("getTour");
         Tour tour = tourService.getTourById(tourId);
         CommentsTour commentsTour = new CommentsTour();
+        commentsTour.setTourID(tour);
         modelAndView.addObject("tour",tour);
-        modelAndView.addObject("comments",commentsTour);
-        modelAndView.addObject("allComments",commentsTourService.getAllCommentsTour());
+        modelAndView.addObject("commentsTour",commentsTour);
+        modelAndView.addObject("allComments",commentsTourService.getAllCommentsTour(tour));
         return modelAndView;
     }
-//    @PostMapping(value = "/getTour")
-//    public String getTour(@RequestParam(name = "tourId") Integer id,@ModelAttribute(name = "comment") CommentsTour commentsTour){
-//
-//    }
-
-
+    @PostMapping(value = "/getTour")
+    public String getTour(@RequestParam(name = "tourId") Integer id){
+        tourService.bookTour(id);
+        return "redirect:/book_tour?tourId="+id;
+    }
 }

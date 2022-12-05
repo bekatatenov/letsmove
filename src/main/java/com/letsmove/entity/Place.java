@@ -42,6 +42,9 @@ public class Place {
     @Column(name = "ADDRESS")
     private String address;
 
+    @Column(name = "RATING")
+    private Double rating;
+
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)
     private Status status;

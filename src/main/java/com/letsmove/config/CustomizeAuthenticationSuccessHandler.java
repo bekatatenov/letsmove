@@ -29,7 +29,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
             throws IOException {
         response.setStatus(HttpServletResponse.SC_OK);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users users = userService.FindByLogin(auth.getName());
+        Users users = userService.findByLogin(auth.getName());
         if (users.getRole().equals(Role.USER)) {
             response.sendRedirect("/userMain");
         } else if (users.getRole().equals(Role.MANAGER)) {

@@ -40,10 +40,10 @@
     <tr th:each="tour:${allActiveTour}">
         <td th:text="${tour.getNameTour()}"></td>
         <td th:text="${tour.getVisitors()}"></td>
-        <form th:action="@{/save_active_tour}" method="post">
+        <form th:action="@{/book_tour}" method="get">
             <input th:value="${tour.getId()}" type="number" hidden="hidden" name="tourId"/>
             <td>
-                <input type="submit" value="Подробние"/>
+                <input type="submit" value="Подробнее"/>
             </td>
         </form>
     </tr>

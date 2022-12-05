@@ -24,10 +24,6 @@ public class HistoryTour {
     @JoinColumn(name = "TOUR_ID")
     private Tour tourID;
 
-    @Column(name = "COMMENT")
-    private String comment;
-
-
     @Column(name = "CREATED_DATE")
     private Date createdDate;
 

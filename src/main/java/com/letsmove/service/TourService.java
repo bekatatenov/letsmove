@@ -1,6 +1,5 @@
 package com.letsmove.service;
 
-import com.letsmove.dao.GuidesRepository;
 import com.letsmove.dao.TourRepository;
 import com.letsmove.entity.*;
 import com.letsmove.enums.Status;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 @Service
@@ -28,9 +26,12 @@ public class TourService {
     @Autowired
     private EmailSenderService emailSenderService;
 
+    @Autowired
+    private HistoryTourService historyTourService;
+
     public Tour save(Tour tour){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Users user = userService.FindByLogin(auth.getName());
+        Users user = userService.findByLogin(auth.getName());
         Guides guides = guidesService.findByUserID(user);
         tour.setGuidesID(guides);
         tour.setCreatedDate(new Date());
@@ -49,7 +50,7 @@ public class TourService {
     }
 
     public void updateTourStatus(Integer id, String status) {
-        Tour tour = tourRepository.findPlaceById(id);
+        Tour tour = tourRepository.findTourById(id);
         Guides guides = tour.getGuidesID();
         Users users = guides.getUsersID();
         if (status.equals("ACTIVE")) {
@@ -60,6 +61,19 @@ public class TourService {
             tour.setStatus(Status.UN_ACTIVE);
             emailSenderService.sendEmail(users.getEmail(),"К сожалению, по нашим взглядам ваш тур не подходит для размещения на нашем сайте. \n Поэтому вам отказано в доступе. \n Попробуйте переделать вашу заявку и отправить повторно :)","Фидбек на заявку");
         }
+        tourRepository.save(tour);
+    }
+
+    public void bookTour(Integer id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Users users = userService.findByLogin(authentication.getName());
+        Tour tour = tourRepository.findTourById(id);
+        Guides guides = tour.getGuidesID();
+        Users guide = guides.getUsersID();
+        tour.setVisitors(tour.getVisitors()+1);
+        emailSenderService.sendEmail(users.getEmail(),"Здравствуйте, " + users.getLogin() + " вы успешно забронировали тур " + tour.getNameTour() + "\n" + "Ваш гид для этого тура : " + guides.getFio() + "\n" + "Вы можете связаться с ним по этим данным: "  + "Email: "+guide.getEmail() + "\nНомер: " + guides.getPhoneNumber(),"Бронирование тура!");
+        emailSenderService.sendEmail(guide.getEmail(),"Здравствуйте, " + guides.getFio() + " ваш тур "+tour.getNameTour()+" успешно забронировали"+"Вы можете связаться с клиентом по этим данным: "+"Email: "+users.getEmail(),"Бронирование тура!");
+        historyTourService.save(users,tour);
         tourRepository.save(tour);
     }
 }
