@@ -29,131 +29,197 @@
     <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
     <!--= <link rel="stylesheet" type="text/css" href="/static/util.css"> =-->
-    <!--    <link rel="stylesheet" type="text/css" href="/static/css/main.css">-->
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
     <!--===============================================================================================-->
+
 </head>
 <style>
-    .header {
-        overflow: hidden;
-        background-color: #38b37b;
-        padding: 20px 10px;
+
+    .sign-in {
+        --bs-btn-color: #0d6efd;
+        --bs-btn-border-color: #0d6efd;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #0d6efd;
+        --bs-btn-hover-border-color: #0d6efd;
+        --bs-btn-focus-shadow-rgb: 13, 110, 253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #0d6efd;
+        --bs-btn-active-border-color: #0d6efd;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #0d6efd;
+        --bs-btn-disabled-bg: transparent;
+        --bs-btn-disabled-border-color: #0d6efd;
+        --bs-gradient: none;
     }
 
-    /* Style the header links */
-    .header a {
-        float: left;
-        color: black;
-        text-align: center;
-        padding: 12px;
-        text-decoration: none;
-        font-size: 18px;
-        line-height: 25px;
-        border-radius: 4px;
+    .sign-up {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #0d6efd;
+        --bs-btn-border-color: #0d6efd;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #0b5ed7;
+        --bs-btn-hover-border-color: #0a58ca;
+        --bs-btn-focus-shadow-rgb: 49, 132, 253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #0a58ca;
+        --bs-btn-active-border-color: #0a53be;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #0d6efd;
+        --bs-btn-disabled-border-color: #0d6efd;
     }
 
-    /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-    .header a.logo {
-        font-size: 25px;
-        font-weight: bold;
 
-    }
-
-    /* Change the background color on mouse-over */
-    .header a:hover {
-        background-color: #ddd;
-        color: black;
-    }
-
-    /* Style the active/current link*/
-    .header a.home {
-        margin-right: 10px;
-        background-color: dodgerblue;
-        color: white;
-    }
-
-    .header a.sign-in {
-        margin-right: 10px;
-        background-color: #ff4444;
-        color: white;
-    }
-
-    .header a.sign-up {
-        background-color: #ff4444;
-        color: white;
-    }
-
-    /* Float the link section to the right */
-    .header-right {
-        float: right;
-    }
-
-    /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-    @media screen and (max-width: 500px) {
-        .header a {
-            float: none;
-            display: block;
-            text-align: left;
-        }
-
-        .header-right {
-            float: none;
-        }
-    }
 
 
 </style>
 <body>
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <img class="logo"
+                 src="https://www.sostav.ru/app/public/images/news/2013/10/28/original/2013-10-28_14-31-46_475575.jpg"
+                 width="120" height="60">
+            <a href="/" class="logo">Let's Move</a>
+        </a>
 
-<div class="header">
-    <div class="container"></div>
-    <img class="logo"
-         src="https://www.sostav.ru/app/public/images/news/2013/10/28/original/2013-10-28_14-31-46_475575.jpg"
-         width="150" height="100"
-         alt="Иллюстрация" align="left"
-         vspace="5" hspace="5">
-    <a href="#default" class="logo">Let's Move</a>
-    <div class="header-right">
-        <a class="home" href="/userMain">My profile</a>
-        <a class="sign-in" href="/login">Sign IN</a>
-        <a class="sign-up" href="/register">Sign UP</a>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 link-dark">Достопримечательности</a></li>
+            <li><a href="/get_all_place" class="nav-link px-2 link-dark">Заведения</a></li>
+            <li><a href="/get_all_tour" class="nav-link px-2 link-dark">Туры</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">Инфо</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <a class="sign-in" href="/login">Sign IN</a>
+            <a class="sign-up" href="/register">Sign UP</a>
+            <button type="button" href="/login" class="btn btn-primary1">Sign IN</button>
+             <button type="submit" href="/register" class="btn btn-primary2">Sign UP</button>
+        </div>
+    </header>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://tripplanet.ru/wp-content/uploads/asia/kyrgyzstan/bishkek/dostoprimechatelnosti-bishkeka.jpg"
+                     class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://img.geliophoto.com/bishkek/00_bishkek.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://img.geliophoto.com/bishkek/08_bishkek.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </div>
-
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Let's Move</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/main">Главная страница</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Достопримечатльности</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/getPlace">Заведения</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/getTour">Туры</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Дополнительно
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-            </ul>
+<div class="container py-5">
+    <h2 class="h3 font-weight-bold">Let's Move</h2>
+    <div class="row">
+        <div class="col-lg-10 mb-4">
+            <p class="font-italic text-muted">Let’s Move - это платформа, которая объединяет отзывы путешественников о
+                местах различных объектах. Благодаря Let’s Move Вы сможете организовать свое лучшее путешествие, начиная
+                с планирования, бронирования и заканчивая самой поездкой. Наше приложение позволит вам получить максимум
+                удовольствия от путешествия на всех его этапах. Узнайте, в каком месте остановиться, чем заняться и где
+                поесть, благодаря рекомендациям людей, которые здесь побывали. Также Вас ждут специальные предложения
+                отелей, ресторанов и бронирование увлекательных туров. </p>
+            <br>
+            <h2 class="h3 font-weight-bold">Цель данного проекта: </h2>
+            <p class="font-italic text-muted">Какой бы ни была цель Вашей поездки, Let’s Move поможет упростить ее
+                планирование и поделиться опытом с другими путешественниками.</p>
         </div>
     </div>
-</nav>
+</div>
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container my-5">
+
+    <footer class="bg-light text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #3b5998;"
+                        href="#!" target="_blank"
+                        role="button"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
+
+                <!-- Twitter -->
+                <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #55acee;"
+                        href="#!" target="_blank"
+                        role="button"
+                ><i class="fab fa-twitter"></i
+                ></a>
+
+                <!-- Google -->
+                <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #dd4b39;"
+                        href="#!" target="_blank"
+                        role="button"
+                ><i class="fab fa-google"></i
+                ></a>
+
+                <!-- Instagram -->
+                <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #ac2bac;"
+                        href="#!" target="_blank"
+                        role="button"
+                ><i class="fab fa-instagram"></i
+                ></a>
+
+                <!-- Linkedin -->
+                <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #0082ca;"
+                        href="#!" target="_blank"
+                        role="button"
+                ><i class="fab fa-linkedin-in"></i
+                ></a>
+                <!-- Github -->
+                <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #333333;"
+                        href="https://github.com/bekatatenov/letsmove" target="_blank"
+                        role="button"
+                ><i class="fab fa-github"></i
+                ></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+
+    </footer>
+</div>
 </body>
 </html>

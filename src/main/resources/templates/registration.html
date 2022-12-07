@@ -38,6 +38,12 @@
     Данный логин уже используется
 </div>
 
+<!-- success message -->
+<div th:if="${param.success}">
+    <div class="alert alert-info">You've successfully registered
+        to our awesome app!</div>
+</div>
+
 <form th:action="@{/registration}" method="post" th:object="${user}">
 
     <section class="vh-100 bg-image"
