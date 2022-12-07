@@ -59,13 +59,13 @@
     color: white;
 }
 
-.header a.sign-in {
+.login-button {
     margin-right: 10px;
     background-color: #ff4444;
     color: white;
 }
 
-.header a.sign-up {
+.reg-button {
     background-color: #ff4444;
     color: white;
 }
