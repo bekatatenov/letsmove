@@ -48,8 +48,8 @@
         <form th:action="@{/save_active_tour}" method="post">
             <input th:value="${tour.getId()}" type="number" hidden="hidden" name="tourId"/>
             <td><select th:object="${status}" type="text" name="status">
-                <option th:each="status:${statuses}">
-                    <th:block th:text="${status}"></th:block>
+                <option th:each="status:${statuses}" th:value="${status}">
+                    <th:block th:text="${status.getName()}"></th:block>
                 </option>
             </select>>
             </td>
