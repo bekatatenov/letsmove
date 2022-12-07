@@ -3,35 +3,60 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <title>Place</title>
+    <title>Place</title>
 </head>
 <body th:object="${place}">
+
 <form th:action="@{/change_rating}" method="post">
-  <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeId"/>
-  <h1><th:block th:text="${place.getPlaceName()}"></th:block> </h1>
-  <h2>rating:<th:block th:text="${place.getRating()}"></th:block> </h2>
-  <h3>place type:<th:block th:text="${place.getPlaceType()}"></th:block> </h3>
-  <h3>place address:<th:block th:text="${place.getAddress()}"></th:block> </h3>
-  <img th:src="${place.getImg()}">
-  <p><th:block th:text="${place.getInfo()}"></th:block></p>
-  <label>Рейтинг :
-    <select th:value="${rating}" type="number" name="rating">
-    <option value="5">⭐⭐⭐⭐⭐</option>
-    <option value="4">⭐⭐⭐⭐</option>
-    <option value="3">⭐⭐⭐</option>
-    <option value="2">⭐⭐</option>
-    <option value="1">⭐</option>
-  </select>
-  </label>
-  <input type="submit" value="отправить"/>
+    <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeId"/>
+    <h1>
+        <th:block th:text="${place.getPlaceName()}"></th:block>
+    </h1>
+    <h2>rating:
+        <th:block th:text="${place.getRating()}"></th:block>
+    </h2>
+    <h3>place type:
+        <th:block th:text="${place.getPlaceType()}"></th:block>
+    </h3>
+    <h3>place address:
+        <th:block th:text="${place.getAddress()}"></th:block>
+    </h3>
+    <img th:src="${place.getImg()}" width="300" height="300">
+    <p>
+        <th:block th:text="${place.getInfo()}"></th:block>
+    </p>
+    <label>Рейтинг :
+        <select th:value="${rating}" type="number" name="rating">
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+        </select>
+    </label>
+    <input type="submit" value="отправить"/>
 </form>
+
 <form th:action="@{/save_place_comment}" method="post" th:object="${commentsPlace}">
-  <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeID"/>
-  <label> <h3>Комментарий :</h3>
-    <textarea th:value="${commentsPlace.comment}" type="text" name="comment" cols="25" rows="3"></textarea></label>
-  <br>
-  <div><input type="reset" value="сброс">
-    <input type="submit" value="отправить"/></div>
+    <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeID"/>
+    <label><h3>Комментарий :</h3>
+        <textarea th:value="${commentsPlace.comment}" type="text" name="comment" cols="25" rows="3"></textarea></label>
+    <br>
+    <div><input type="reset" value="сброс">
+        <input type="submit" value="отправить"/></div>
+</form>
+
+<h2>Комментарии: </h2>
+<form th:action="@{/look_place}" method="get" th:object="${allComments}">
+    <div th:each="comment:${allComments}">
+        <h3>
+            <th:block th:text="${comment.getUsersID().getLogin()}"></th:block>
+        </h3>
+        <H4>
+            <th:block th:text="${comment.getComment()}"></th:block>
+        </H4>
+      <hr>
+    </div>
 </form>
 </table>
 </body>

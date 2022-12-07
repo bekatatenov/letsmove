@@ -1,6 +1,7 @@
 package com.letsmove.dao;
 
 import com.letsmove.entity.Place;
+import com.letsmove.enums.PlaceType;
 import com.letsmove.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,7 @@ public interface PlaceRepository extends JpaRepository<Place, Integer> {
     List<Place> findAllByStatus(Status status);
     @Transactional
     Place findPlaceById(Integer id);
+
+    @Transactional
+    List<Place> findPlacesByPlaceType(PlaceType placeType);
 }
