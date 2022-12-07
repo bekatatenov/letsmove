@@ -16,43 +16,62 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <!--= <link rel="stylesheet" type="text/css" href="/static/util.css"> =-->
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <!--===============================================================================================-->
 
 </head>
 <style>
 
-.login-button {
-    --bs-btn-color: #0d6efd;
-    --bs-btn-border-color: #0d6efd;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #0d6efd;
-    --bs-btn-hover-border-color: #0d6efd;
-    --bs-btn-focus-shadow-rgb: 13,110,253;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #0d6efd;
-    --bs-btn-active-border-color: #0d6efd;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #0d6efd;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: #0d6efd;
-    --bs-gradient: none;
-}
+    .sign-in {
+        --bs-btn-color: #0d6efd;
+        --bs-btn-border-color: #0d6efd;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #0d6efd;
+        --bs-btn-hover-border-color: #0d6efd;
+        --bs-btn-focus-shadow-rgb: 13, 110, 253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #0d6efd;
+        --bs-btn-active-border-color: #0d6efd;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #0d6efd;
+        --bs-btn-disabled-bg: transparent;
+        --bs-btn-disabled-border-color: #0d6efd;
+        --bs-gradient: none;
+    }
 
-.reg-button {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: #0d6efd;
-    --bs-btn-border-color: #0d6efd;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #0b5ed7;
-    --bs-btn-hover-border-color: #0a58ca;
-    --bs-btn-focus-shadow-rgb: 49,132,253;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #0a58ca;
-    --bs-btn-active-border-color: #0a53be;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #0d6efd;
-    --bs-btn-disabled-border-color: #0d6efd;
-}
+    .sign-up {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #0d6efd;
+        --bs-btn-border-color: #0d6efd;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #0b5ed7;
+        --bs-btn-hover-border-color: #0a58ca;
+        --bs-btn-focus-shadow-rgb: 49, 132, 253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #0a58ca;
+        --bs-btn-active-border-color: #0a53be;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #0d6efd;
+        --bs-btn-disabled-border-color: #0d6efd;
+    }
+
+
+
+
 </style>
 <body>
 <div class="container">
@@ -72,10 +91,10 @@
         </ul>
 
         <div class="col-md-3 text-end">
-            <a href="/login" class="login-button">Sign IN</a>
-            <a href="/register" class="reg-button">Sign UP</a>
-            <button type="button" class="btn btn-primary" href="/login">Sign IN</button>
-            <button type="button" class="btn btn-primary" href="/register">Sign UP</button>
+            <a class="sign-in" href="/login">Sign IN</a>
+            <a class="sign-up" href="/register">Sign UP</a>
+            <button type="button" href="/login" class="btn btn-primary1">Sign IN</button>
+             <button type="submit" href="/register" class="btn btn-primary2">Sign UP</button>
         </div>
     </header>
 
@@ -110,6 +129,23 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+    </div>
+</div>
+<div class="container py-5">
+    <h2 class="h3 font-weight-bold">Let's Move</h2>
+    <div class="row">
+        <div class="col-lg-10 mb-4">
+            <p class="font-italic text-muted">Let’s Move - это платформа, которая объединяет отзывы путешественников о
+                местах различных объектах. Благодаря Let’s Move Вы сможете организовать свое лучшее путешествие, начиная
+                с планирования, бронирования и заканчивая самой поездкой. Наше приложение позволит вам получить максимум
+                удовольствия от путешествия на всех его этапах. Узнайте, в каком месте остановиться, чем заняться и где
+                поесть, благодаря рекомендациям людей, которые здесь побывали. Также Вас ждут специальные предложения
+                отелей, ресторанов и бронирование увлекательных туров. </p>
+            <br>
+            <h2 class="h3 font-weight-bold">Цель данного проекта: </h2>
+            <p class="font-italic text-muted">Какой бы ни была цель Вашей поездки, Let’s Move поможет упростить ее
+                планирование и поделиться опытом с другими путешественниками.</p>
+        </div>
     </div>
 </div>
 <!-- Remove the container if you want to extend the Footer to full width. -->
