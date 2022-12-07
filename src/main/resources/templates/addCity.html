@@ -37,7 +37,7 @@
     <div><label> Информация о городе : <input th:value="${information}" type="text" name="information" autofocus required/> </label>
     </div>
     <br>
-    <div><label> Население : <input th:value="${population}" type="number" name="population" autofocus required/>
+    <div><label> Население : <input th:value="${population}" type="number" min="0" name="population" autofocus required/>
     </label></div>
     <br>
     <div><label> URL картинки : <input th:value="${img}" type="url" name="img"/> </label></div>

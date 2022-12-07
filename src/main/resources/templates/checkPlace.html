@@ -49,15 +49,16 @@
         <form th:action="@{/save_active_place}" method="post">
             <input th:value="${place.id}" type="number" hidden="hidden" name="placeId"/>
             <td><select th:object="${status}" type="text" name="status">
-                <option th:each="status:${statuses}" th:value="status">
+                <option th:each="status:${statuses}" th:value="${status}">
                     <th:block th:text="${status.getName()}"></th:block>
                 </option>
-            </select>>
+            </select>
             </td>
             <td>
             <input type="submit" value="Send"/>
             </td>
         </form>
+        <hr>
     </tr>
 </table>
 </body>

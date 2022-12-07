@@ -40,8 +40,8 @@
         </select> </label></div>
 
     <div><label>Выберите категорию места:
-        <select th:value="${placeType}" type="text" name="placeType">
-            <option th:each="placeType:${placeTypes}" th:value="placeType">
+        <select th:value="${place.placeType}" name="placeType">
+            <option th:each="placeType:${placeTypes}" th:value="${placeType}">
                 <th:block th:text="${placeType.getName()}"></th:block>
             </option>
         </select> </label></div>

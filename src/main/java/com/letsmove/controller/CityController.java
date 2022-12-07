@@ -35,12 +35,8 @@ public class CityController {
 
     @PostMapping(value = "/save_city")
     public String saveCity(@ModelAttribute(name = "city") City city) {
-        try {
-            this.cityService.save(city);
-            System.out.println(city.getInformation());
-            return "adminMain";
-        }catch (Exception e){
-            return "addCity";
-        }
+        this.cityService.save(city);
+        return "adminMain";
+
     }
 }

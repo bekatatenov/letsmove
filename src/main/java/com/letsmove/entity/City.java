@@ -24,7 +24,6 @@ public class City {
     private Integer population;
 
     @Lob
-    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "INFORMATION")
     private String information;
 

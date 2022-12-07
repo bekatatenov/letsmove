@@ -86,22 +86,60 @@ public class PlaceController {
         modelAndView.addObject("allActivePlace", allActivePlace);
         return modelAndView;
     }
+    @RequestMapping(value = "/get_all_hotel", method = RequestMethod.GET)
+    public ModelAndView getAllHotel() {
+        ModelAndView modelAndView = new ModelAndView("AllPlace");
+        ArrayList<Place> allActivePlace = (ArrayList<Place>) placeService.allHotel();
+        modelAndView.addObject("allActivePlace", allActivePlace);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/get_all_cafe", method = RequestMethod.GET)
+    public ModelAndView getAllCafe() {
+        ModelAndView modelAndView = new ModelAndView("AllPlace");
+        ArrayList<Place> allActivePlace = (ArrayList<Place>) placeService.allCafe();
+        modelAndView.addObject("allActivePlace", allActivePlace);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/get_all_market", method = RequestMethod.GET)
+    public ModelAndView getAllMarket() {
+        ModelAndView modelAndView = new ModelAndView("AllPlace");
+        ArrayList<Place> allActivePlace = (ArrayList<Place>) placeService.allMarket();
+        modelAndView.addObject("allActivePlace", allActivePlace);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/get_all_attraction", method = RequestMethod.GET)
+    public ModelAndView getAllAttraction() {
+        ModelAndView modelAndView = new ModelAndView("AllPlace");
+        ArrayList<Place> allActivePlace = (ArrayList<Place>) placeService.allAttraction();
+        modelAndView.addObject("allActivePlace", allActivePlace);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/get_all_shopping_center", method = RequestMethod.GET)
+    public ModelAndView getAllShoppingCenter() {
+        ModelAndView modelAndView = new ModelAndView("AllPlace");
+        ArrayList<Place> allActivePlace = (ArrayList<Place>) placeService.allShoppingCenter();
+        modelAndView.addObject("allActivePlace", allActivePlace);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/get_all_state_institutions", method = RequestMethod.GET)
+    public ModelAndView getAllStateInstitutions() {
+        ModelAndView modelAndView = new ModelAndView("AllPlace");
+        ArrayList<Place> allActivePlace = (ArrayList<Place>) placeService.allStateInstitutions();
+        modelAndView.addObject("allActivePlace", allActivePlace);
+        return modelAndView;
+    }
+
 
     @GetMapping(value = "/look_place")
     public ModelAndView getPlace(@RequestParam(name = "placeId") Integer placeId) {
         ModelAndView modelAndView = new ModelAndView("getPlace");
         Place place = placeService.getPlaceById(placeId);
         CommentsPlace commentsPlace = new CommentsPlace();
-        ArrayList<CommentsPlace> commentsPlaces = (ArrayList<CommentsPlace>) commentsPlaceService.getAllCommentsPlace(place);
-        ArrayList<Users> users = new ArrayList<>();
         commentsPlace.setPlaceID(place);
+        ArrayList<CommentsPlace> commentsPlaces = (ArrayList<CommentsPlace>) commentsPlaceService.getAllCommentsPlace(place);
         modelAndView.addObject("place", place);
         modelAndView.addObject("commentsPlace", commentsPlace);
         modelAndView.addObject("allComments", commentsPlaces);
-        for (CommentsPlace c:commentsPlaces) {
-            users.add(c.getUsersID());
-        }
-        modelAndView.addObject("allCommentsAuthor",users);
         return modelAndView;
     }
 

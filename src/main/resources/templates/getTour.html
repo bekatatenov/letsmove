@@ -46,6 +46,18 @@
     <div><input type="reset" value="сброс">
         <input type="submit" value="отправить"/></div>
 </form>
+<h2>Комментарии: </h2>
+<form th:action="@{/look_tour}" method="get" th:object="${allComments}">
+    <div th:each="comment:${allComments}">
+        <h3>
+            <th:block th:text="${comment.getUsersID().getLogin()}"></th:block>
+        </h3>
+        <H4>
+            <th:block th:text="${comment.getComment()}"></th:block>
+        </H4>
+        <hr>
+    </div>
+</form>
 </table>
 </body>
 </html>

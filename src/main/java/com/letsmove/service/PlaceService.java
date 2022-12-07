@@ -4,6 +4,7 @@ import com.letsmove.dao.PlaceRepository;
 import com.letsmove.entity.City;
 import com.letsmove.entity.Place;
 import com.letsmove.entity.Users;
+import com.letsmove.enums.PlaceType;
 import com.letsmove.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -57,11 +58,11 @@ public class PlaceService {
         Users users = place.getUsersID();
         if (status.equals("ACTIVE")) {
             place.setStatus(Status.ACTIVE);
-            emailSenderService.sendEmail(users.getEmail(), "Поздравляю, по нашим взглядам ваше заведение подходит для размещения на нашем сайте. \n Поэтому вам одобренно в доступе. \n Ваше заведение уже размещено на сайте :)", "Фидбек на заявку");
+            emailSenderService.sendEmail(users.getEmail(), "Поздравляю, по нашим взглядам ваше заведение "+place.getPlaceName()+" подходит для размещения на нашем сайте. \n Поэтому вам одобренно в доступе. \n Ваше заведение уже размещено на сайте :)", "Фидбек на заявку");
 
         } else if (status.equals("UN_ACTIVE")) {
             place.setStatus(Status.UN_ACTIVE);
-            emailSenderService.sendEmail(users.getEmail(), "К сожалению, по нашим взглядам ваше заведение не подходит для размещения на нашем сайте. \n Поэтому вам отказано в доступе. \n Попробуйте переделать вашу заявку и отправить повторно :)", "Фидбек на заявку");
+            emailSenderService.sendEmail(users.getEmail(), "К сожалению, по нашим взглядам ваше заведение "+place.getPlaceName()+" не подходит для размещения на нашем сайте. \n Поэтому вам отказано в доступе. \n Попробуйте переделать вашу заявку и отправить повторно :)", "Фидбек на заявку");
 
         }
         placeRepository.save(place);
@@ -81,6 +82,26 @@ public class PlaceService {
         }
         placeRepository.save(place);
     }
+
+    public List<Place> allHotel(){
+        return placeRepository.findPlacesByPlaceType(PlaceType.HOTEL);
+    }
+    public List<Place> allAttraction(){
+        return placeRepository.findPlacesByPlaceType(PlaceType.ATTRACTION);
+    }
+    public List<Place> allCafe(){
+        return placeRepository.findPlacesByPlaceType(PlaceType.CAFE);
+    }
+    public List<Place> allMarket(){
+        return placeRepository.findPlacesByPlaceType(PlaceType.MARKET);
+    }
+    public List<Place> allShoppingCenter(){
+        return placeRepository.findPlacesByPlaceType(PlaceType.SHOPPING_CENTER);
+    }
+    public List<Place> allStateInstitutions(){
+        return placeRepository.findPlacesByPlaceType(PlaceType.STATE_INSTITUTIONS);
+    }
+
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 

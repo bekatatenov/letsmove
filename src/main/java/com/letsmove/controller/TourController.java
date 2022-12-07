@@ -69,7 +69,7 @@ public class TourController {
     }
 
 
-    @GetMapping(value = "/book_tour")
+    @GetMapping(value = "/look_tour")
     public ModelAndView getBookTour(@RequestParam(name = "tourId") Integer tourId) {
         ModelAndView modelAndView = new ModelAndView("getTour");
         Tour tour = tourService.getTourById(tourId);
@@ -83,6 +83,6 @@ public class TourController {
     @PostMapping(value = "/getTour")
     public String getTour(@RequestParam(name = "tourId") Integer id){
         tourService.bookTour(id);
-        return "redirect:/book_tour?tourId="+id;
+        return "redirect:/look_tour?tourId="+id;
     }
 }
