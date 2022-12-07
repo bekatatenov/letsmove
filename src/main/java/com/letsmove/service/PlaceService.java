@@ -35,7 +35,7 @@ public class PlaceService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users user = userService.findByLogin(auth.getName());
         if(place.getImg() == null){
-            place.setImg("https://drive.google.com/file/d/1qsOCJ1IZbAf0u_OCvEM1jseCCQLJnYI6/view?usp=sharing");
+            place.setImg("https://matclass.ru/administrator/components/com_teacher/images/no_image.jpg");
         }
         place.setUsersID(user);
         place.setCityID(city);

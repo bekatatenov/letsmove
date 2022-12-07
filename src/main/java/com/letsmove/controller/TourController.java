@@ -38,8 +38,7 @@ public class TourController {
             tourService.save(tour);
             return "guideMain";
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return "addTour";
+            return "redirect:/add_tour";
         }
     }
 

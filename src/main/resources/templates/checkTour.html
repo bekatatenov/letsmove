@@ -35,6 +35,7 @@
 </form>
 <table>
     <tr>
+        <th>IMG</th>
         <th>ID</th>
         <th>TOUR NAME</th>
         <th>CREATED DATE</th>
@@ -42,6 +43,7 @@
         <th>COMMIT</th>
     </tr>
     <tr th:each="tour:${allNewTour}">
+        <td><img th:src="${tour.getImg()}" height="100" width="100"></td>
         <td th:text="${tour.getId()}"></td>
         <td th:text="${tour.getNameTour()}"></td>
         <td th:text="${tour.getCreatedDate()}"></td>
@@ -52,6 +54,26 @@
                     <th:block th:text="${status.getName()}"></th:block>
                 </option>
             </select>>
+            </td>
+            <td>
+                <input type="submit" value="Send"/>
+            </td>
+        </form>
+    </tr>
+    <tr th:each="place:${allNewPlace}">
+        <td><img th:src="${place.img}" height="100" width="100"></td>
+        <td th:text="${place.id}"></td>
+        <td th:text="${place.placeName}"></td>
+        <td th:text="${place.placeType}"></td>
+        <td th:text="${place.address}"></td>
+        <td th:text="${place.createdDate}"></td>
+        <form th:action="@{/save_active_place}" method="post">
+            <input th:value="${place.id}" type="number" hidden="hidden" name="placeId"/>
+            <td><select th:object="${status}" type="text" name="status">
+                <option th:each="status:${statuses}" th:value="${status}">
+                    <th:block th:text="${status.getName()}"></th:block>
+                </option>
+            </select>
             </td>
             <td>
                 <input type="submit" value="Send"/>

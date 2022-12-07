@@ -29,9 +29,15 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <!--===============================================================================================-->
 </head>
+<style>
+    table {
+        margin: auto;
+    }
+</style>
 <body>
 <table>
     <tr>
+        <th>IMG</th>
         <th>ID</th>
         <th>PLACE NAME</th>
         <th>PLACE TYPE</th>
@@ -41,6 +47,7 @@
         <th>COMMIT</th>
     </tr>
     <tr th:each="place:${allNewPlace}">
+        <td><img th:src="${place.img}" height="100" width="100"></td>
         <td th:text="${place.id}"></td>
         <td th:text="${place.placeName}"></td>
         <td th:text="${place.placeType}"></td>
@@ -55,10 +62,9 @@
             </select>
             </td>
             <td>
-            <input type="submit" value="Send"/>
+                <input type="submit" value="Send"/>
             </td>
         </form>
-        <hr>
     </tr>
 </table>
 </body>
