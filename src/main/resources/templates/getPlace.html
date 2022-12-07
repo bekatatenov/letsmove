@@ -40,7 +40,7 @@
 <form th:action="@{/save_place_comment}" method="post" th:object="${commentsPlace}">
     <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeID"/>
     <label><h3>Комментарий :</h3>
-        <textarea th:value="${commentsPlace.comment}" type="text" name="comment" cols="25" rows="3"></textarea></label>
+        <textarea th:value="${commentsPlace.comment}" type="text" name="comment" cols="25" rows="3" minlength="1" autofocus required></textarea></label>
     <br>
     <div><input type="reset" value="сброс">
         <input type="submit" value="отправить"/></div>
