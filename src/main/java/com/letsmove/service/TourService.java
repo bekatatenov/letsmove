@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -78,5 +79,8 @@ public class TourService {
         emailSenderService.sendEmail(guide.getEmail(),"Здравствуйте, " + guides.getFio() + " ваш тур "+tour.getNameTour()+" успешно забронировали"+"Вы можете связаться с клиентом по этим данным: "+"Email: "+users.getEmail(),"Бронирование тура!");
         historyTourService.save(users,tour);
         tourRepository.save(tour);
+    }
+    public ArrayList<Tour> findAllToursByGuidesId(Guides id){
+        return tourRepository.findToursByGuidesID(id);
     }
 }
