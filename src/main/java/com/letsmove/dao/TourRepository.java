@@ -1,5 +1,6 @@
 package com.letsmove.dao;
 
+import com.letsmove.entity.Guides;
 import com.letsmove.entity.Place;
 import com.letsmove.entity.Tour;
 import com.letsmove.enums.Status;
@@ -18,4 +19,7 @@ public interface TourRepository extends JpaRepository<Tour, Integer> {
 
     @Transactional
     Tour findTourById(Integer id);
+
+    @Transactional
+    ArrayList<Tour> findToursByGuidesID(Guides id);
 }
