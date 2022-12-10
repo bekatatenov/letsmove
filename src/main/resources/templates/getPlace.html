@@ -1,10 +1,67 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Place</title>
 </head>
+<style>
+    body {
+        max-width: 300px;
+        margin: auto;
+    }
+
+    body{
+        margin-top:20px;
+        background:#eee;
+    }
+    @media (min-width: 0) {
+        .g-mr-15 {
+            margin-right: 1.07143rem !important;
+        }
+    }
+    @media (min-width: 0){
+        .g-mt-3 {
+            margin-top: 0.21429rem !important;
+        }
+    }
+
+    .g-height-50 {
+        height: 50px;
+    }
+
+    .g-width-50 {
+        width: 50px !important;
+    }
+
+    @media (min-width: 0){
+        .g-pa-30 {
+            padding: 2.14286rem !important;
+        }
+    }
+
+    .g-bg-secondary {
+        background-color: #fafafa !important;
+    }
+
+    .u-shadow-v18 {
+        box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+    }
+
+    .g-color-gray-dark-v4 {
+        color: #777 !important;
+    }
+
+    .g-font-size-12 {
+        font-size: 0.85714rem !important;
+    }
+
+    .media-comment {
+        margin-top:20px
+    }
+
+</style>
 <body th:object="${place}">
 
 <form th:action="@{/change_rating}" method="post">
@@ -12,13 +69,13 @@
     <h1>
         <th:block th:text="${place.getPlaceName()}"></th:block>
     </h1>
-    <h2>rating:
+    <h2>Рейтинг:
         <th:block th:text="${place.getRating()}"></th:block>
     </h2>
-    <h3>place type:
+    <h3>Тип места:
         <th:block th:text="${place.getPlaceType()}"></th:block>
     </h3>
-    <h3>place address:
+    <h3>Адрес:
         <th:block th:text="${place.getAddress()}"></th:block>
     </h3>
     <img th:src="${place.getImg()}" width="300" height="300">
@@ -40,7 +97,8 @@
 <form th:action="@{/save_place_comment}" method="post" th:object="${commentsPlace}">
     <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeID"/>
     <label><h3>Комментарий :</h3>
-        <textarea th:value="${commentsPlace.comment}" type="text" name="comment" cols="25" rows="3" minlength="1" maxlength="250" autofocus required></textarea></label>
+        <textarea th:value="${commentsPlace.comment}" type="text" name="comment" cols="25" rows="3" minlength="1"
+                  maxlength="250" autofocus required></textarea></label>
     <br>
     <div><input type="reset" value="сброс">
         <input type="submit" value="отправить"/></div>
@@ -55,31 +113,51 @@
         <H4>
             <th:block th:text="${comment.getComment()}"></th:block>
         </H4>
-      <hr>
+        <hr>
     </div>
 </form>
-</table>
-<main class="main columns">
-    <section class="column main-column">
-        <a class="article first-article" href="#">
-            <figure class="article-image is-4by3">
-                <img th:src="${place.getImg()}" alt="">
-            </figure>
-            <div class="article-body">
-                <h2 class="article-title">
-                    Hello World
-                </h2>
-                <p class="article-content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros.
-                </p>
-                <footer class="article-info">
-                    <span>By Joe Smith</span>
-                    <span>42 comments</span>
-                </footer>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="media g-mb-30 media-comment">
+                <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                    <th:each="comment:${allComments}"></th:each>
+                    <div class="g-mb-15">
+                        <h5 class="h5 g-color-gray-dark-v1 mb-0">John Doe</h5>
+                        <span class="g-color-gray-dark-v4 g-font-size-12">5 days ago</span>
+                    </div>
+
+                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
+                        felis in faucibus ras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+
+                    <ul class="list-inline d-sm-flex my-0">
+                        <li class="list-inline-item g-mr-20">
+                            <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
+                                178
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mr-20">
+                            <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
+                                34
+                            </a>
+                        </li>
+                        <li class="list-inline-item ml-auto">
+                            <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
+                                Reply
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </a>
-    </section>
-</main>
+        </div>
+    </div>
+</div>
+
+</table>
 </body>
 </html>

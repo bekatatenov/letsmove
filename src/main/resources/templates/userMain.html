@@ -181,9 +181,8 @@
         -webkit-overflow-scrolling: touch;
     }
 
-    p.big-text {
-        text-align: center;
-        margin: auto;
+    .big-text {
+        margin-left: 100px;
         font-size: 35px;
         color: #1b5792;
     }
@@ -192,56 +191,64 @@
         margin-right: 70px;
     }
 
+    .logo {
+        margin-left: 50px;
+    }
+
 </style>
 <body>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <img class="logo"
-             src="https://www.sostav.ru/app/public/images/news/2013/10/28/original/2013-10-28_14-31-46_475575.jpg"
-             width="120" height="60" alt="">
+             src="https://thumbs.dreamstime.com/z/kyrgyzstan-low-poly-logo-colorful-gradient-travel-country-geometric-style-multicolored-polygonal-rounded-sign-map-153634759.jpg"
+             width="70" height="50" alt="">
         <p class="big-text">LET'S MOVE</p>
     </a>
 
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/get_all_attraction" class="nav-link px-2 link-dark">Достопримечательности</a></li>
+        <li><a href="/get_all_place" class="nav-link px-2 link-dark">Заведения</a></li>
+        <li><a href="/get_all_tour" class="nav-link px-2 link-dark">Туры</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">Инфо</a></li>
+    </ul>
+
     <div class="col-md-3 text-end">
-        <a class="logout" href="@{/logout}">Logout</a>
+        <a class="logout" href="/logout">Выйти</a>
         <!--        <button type="button" href="/login" class="btn btn-primary1">Sign IN</button>
                 <button type="submit" href="/register" class="btn btn-primary2">Sign UP</button>-->
     </div>
 </header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/manager_register">Стать менеджером</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/guides_register">Стать гидом</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/get_all_tour">Туры</a>
+            </li>
+            <li class="nav-item dropdown">
+                <div class="dropdown">
+                    <button class="dropbtn">Места по категориям</button>
+                    <div class="dropdown-content">
+                        <a href="/get_all_place">Все места</a>
+                        <a href="/get_all_attraction">Все достопримечательности</a>
+                        <a href="/get_all_hotel">Все отели</a>
+                        <a href="/get_all_shopping_center">Все торговые центры</a>
+                        <a href="/get_all_cafe">Все кафе</a>
+                        <a href="/get_all_market">Все супермаркеты</a>
+                        <a href="/get_all_state_institutions">Все Гос.Учреждения</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
 
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Выйти"/>
-</form>
-<form th:action="@{/manager_register}" method="get">
-    <input type="submit" value="Стать менеджером"/>
-</form>
-<form th:action="@{/guides_register}" method="get">
-    <input type="submit" value="Стать гидом"/>
-</form>
-<form th:action="@{/get_all_tour}" method="get">
-    <input type="submit" value="Все туры"/>
-</form>
-<form th:action="@{/get_all_place}" method="get">
-    <input type="submit" value="Все места"/>
-</form>
-<form th:action="@{/get_all_attraction}" method="get">
-    <input type="submit" value="Все достопримечательности"/>
-</form>
-<form th:action="@{/get_all_hotel}" method="get">
-    <input type="submit" value="Все отели"/>
-</form>
-<form th:action="@{/get_all_shopping_center}" method="get">
-    <input type="submit" value="Все торговые центры"/>
-</form>
-<form th:action="@{/get_all_cafe}" method="get">
-    <input type="submit" value="Все кафе"/>
-</form>
-<form th:action="@{/get_all_market}" method="get">
-    <input type="submit" value="Все супермаркеты"/>
-</form>
-<form th:action="@{/get_all_state_institutions}" method="get">
-    <input type="submit" value="Все Гос.Учреждения"/>
-</form>
 </body>
 </html>
