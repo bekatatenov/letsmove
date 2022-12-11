@@ -3,7 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.104.2">
+    <title>Мои места</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -12,23 +17,8 @@
             integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
             crossorigin="anonymous"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="/images/icons/favicon.ico"/>
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <!--= <link rel="stylesheet" type="text/css" href="/static/util.css"> =-->
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <!--===============================================================================================-->
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
+    <meta name="theme-color" content="#712cf9">
 </head>
 <style>
     body {
@@ -191,69 +181,93 @@
         margin-right: 70px;
     }
 
-    .logo {
-        margin-left: 50px;
-    }
-
 </style>
 <body>
+
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <img class="logo"
-             src="https://thumbs.dreamstime.com/z/kyrgyzstan-low-poly-logo-colorful-gradient-travel-country-geometric-style-multicolored-polygonal-rounded-sign-map-153634759.jpg"
-             width="70" height="50" alt="">
+             src="https://www.sostav.ru/app/public/images/news/2013/10/28/original/2013-10-28_14-31-46_475575.jpg"
+             width="120" height="60" alt="">
         <p class="big-text">LET'S MOVE</p>
     </a>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/get_all_attraction" class="nav-link px-2 link-dark">Достопримечательности</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">Достопримечательности</a></li>
         <li><a href="/get_all_place" class="nav-link px-2 link-dark">Заведения</a></li>
         <li><a href="/get_all_tour" class="nav-link px-2 link-dark">Туры</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Инфо</a></li>
     </ul>
 
     <div class="col-md-3 text-end">
-        <a class="logout" href="/logout">Выйти</a>
+        <a class="sign-in" href="/login">Sign IN</a>
+        <a class="sign-up" href="/register">Sign UP</a>
         <!--        <button type="button" href="/login" class="btn btn-primary1">Sign IN</button>
                 <button type="submit" href="/register" class="btn btn-primary2">Sign UP</button>-->
     </div>
 </header>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Выйти"/>
-</form>
-<form th:action="@{/add_place}" method="get">
-    <input type="submit" value="Новое место"/>
-</form>
-<form th:action="@{/get_all_tour}" method="get">
-    <input type="submit" value="Все туры"/>
-</form>
-<form th:action="@{/get_all_place}" method="get">
-    <input type="submit" value="Все места"/>
-</form>
-<form th:action="@{/get_all_attraction}" method="get">
-    <input type="submit" value="Все достопримечательности"/>
-</form>
-<form th:action="@{/get_all_hotel}" method="get">
-    <input type="submit" value="Все отели"/>
-</form>
-<form th:action="@{/get_all_shopping_center}" method="get">
-    <input type="submit" value="Все торговые центры"/>
-</form>
-<form th:action="@{/get_all_cafe}" method="get">
-    <input type="submit" value="Все кафе"/>
-</form>
-<form th:action="@{/get_all_market}" method="get">
-    <input type="submit" value="Все супермаркеты"/>
-</form>
-<form th:action="@{/get_all_state_institutions}" method="get">
-    <input type="submit" value="Все Гос.Учреждения"/>
-</form>
-<form th:action="@{/history_tour_for_user}" method="get">
-    <input type="submit" value="История посещения тура"/>
-</form>
-<form th:action="@{/get_all_author_place}" method="get">
-    <input type="submit" value="Мои места"/>
-</form>
+
+<main>
+
+    <!--    <section class="py-5 text-center container">-->
+    <!--        <div class="row py-lg-5">-->
+    <!--            <div class="col-lg-6 col-md-8 mx-auto">-->
+    <!--                <h1 class="fw-light">Все заведения</h1>-->
+    <!--                <p class="lead text-muted">Здесь вы можете ознакомиться со всеми интересующими вас заведениями.</p>-->
+    <!--                <p>-->
+    <!--                    <a href="#" class="btn btn-primary my-2">Main call to action</a>-->
+    <!--                    <a href="#" class="btn btn-secondary my-2">Secondary action</a>-->
+    <!--                </p>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </section>-->
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <tr th:each="place:${allAuthorPlace}">
+                    <div class="col" style="height: 600px">
+                        <div class="card shadow-sm">
+                            <img th:src="${place.getImg()}" height="225" width="100%">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${place.getPlaceName()}"></h5>
+                                <p class="card-text" th:text="${place.getInfo()}"></p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" th:text="${place.getPlaceType().getName()}"></li>
+                                    <li class="list-group-item" th:text="${place.getAddress()}"></li>
+                                    <li class="list-group-item" th:text="${place.getRating()}"></li>
+                                </ul>
+                                <div class="d-grid gap-2">
+                                    <form th:action="@{/delete_place}" method="post">
+                                        <input th:value="${place.getId()}" type="number" hidden="hidden"
+                                               name="placeId"/>
+                                        <td>
+                                            <input type="submit" class="btn btn-outline-success" value="Удалить"/>
+                                        </td>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#">Вернуться на вверх</a>
+        </p>
+        <p class="mb-0">Хотите перейти на главную страницу ---> &nbsp<a href="/">Перейти</a></p>
+    </div>
+</footer>
+
+
+<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
 </body>
 </html>

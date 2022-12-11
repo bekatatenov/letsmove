@@ -82,6 +82,11 @@ public class PlaceService {
         }
         placeRepository.save(place);
     }
+    public void deletePlace(Integer placeId) {
+        Place place = placeRepository.findPlaceById(placeId);
+        place.setStatus(Status.UN_ACTIVE);
+        placeRepository.save(place);
+    }
 
     public List<Place> allHotel(){
         return placeRepository.findPlacesByPlaceType(PlaceType.HOTEL);
@@ -100,6 +105,11 @@ public class PlaceService {
     }
     public List<Place> allStateInstitutions(){
         return placeRepository.findPlacesByPlaceType(PlaceType.STATE_INSTITUTIONS);
+    }
+    public List<Place> getAllAuthorPlace() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Users users = userService.findByLogin(authentication.getName());
+        return placeRepository.findPlacesByStatusAndUsersID(Status.ACTIVE,users);
     }
 
     public static double round(double value, int places) {

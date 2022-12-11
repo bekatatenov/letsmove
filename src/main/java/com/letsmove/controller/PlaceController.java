@@ -22,7 +22,7 @@ import java.util.List;
 
 
 @Controller
-public class PlaceController {
+public class  PlaceController {
     @Autowired
     private PlaceService placeService;
     @Autowired
@@ -153,5 +153,18 @@ public class PlaceController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Users user = userService.findByLogin(authentication.getName());
         return user;
+    }
+
+    @RequestMapping(value = "/get_all_author_place", method = RequestMethod.GET)
+    public ModelAndView getAllAuthorPlace() {
+        ModelAndView modelAndView = new ModelAndView("AllAuthorPlace");
+        ArrayList<Place> allAuthorPlace = (ArrayList<Place>) placeService.getAllAuthorPlace();
+        modelAndView.addObject("allAuthorPlace", allAuthorPlace);
+        return modelAndView;
+    }
+    @PostMapping(value = "/delete_place")
+    public String changeRating(@RequestParam(name = "placeId") Integer placeId) {
+        placeService.deletePlace(placeId);
+        return "redirect:/get_all_author_place";
     }
 }

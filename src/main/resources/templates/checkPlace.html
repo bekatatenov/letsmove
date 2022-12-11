@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>ПРОВЕРКА ТУРОВ</title>
+    <title>ПРОВЕРКА ЗАВЕДЕНИЙ</title>
     <link rel="stylesheet"
           type="text/css"
           href="https://cdn.datatables.net/v/bs4/dt-1.12.0/datatables.min.css"/>
@@ -17,13 +17,11 @@
 <div class="container">
 
     <h2>
-        <center><b>ПРОВЕРКА МЕСТ</b></center>
+        <center><b>ПРОВЕРКА ЗАВЕДЕНИЙ</b></center>
     </h2>
     <hr/>
     <table class="table table-bordered table-striped" id="employee-table">
-
         <thead>
-
         <tr>
             <th>ID</th>
             <th>IMG</th>
@@ -37,8 +35,8 @@
         </thead>
         <tbody>
         <tr th:each="place:${allNewPlace}">
-            <td><img th:src="${place.img}" height="100" width="100"></td>
             <td th:text="${place.id}"></td>
+            <td><img th:src="${place.img}" height="100" width="100"></td>
             <td th:text="${place.placeName}"></td>
             <td th:text="${place.placeType}"></td>
             <td th:text="${place.address}"></td>
