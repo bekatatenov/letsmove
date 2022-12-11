@@ -162,9 +162,22 @@ public class  PlaceController {
         modelAndView.addObject("allAuthorPlace", allAuthorPlace);
         return modelAndView;
     }
+    @RequestMapping(value = "/delete_all_place", method = RequestMethod.GET)
+    public ModelAndView deleteAllPlace() {
+        ModelAndView modelAndView = new ModelAndView("AllAuthorPlace");
+        ArrayList<Place> allAuthorPlace = (ArrayList<Place>) placeService.getAllActivePlace();
+        modelAndView.addObject("allAuthorPlace", allAuthorPlace);
+        return modelAndView;
+    }
     @PostMapping(value = "/delete_place")
     public String changeRating(@RequestParam(name = "placeId") Integer placeId) {
         placeService.deletePlace(placeId);
-        return "redirect:/get_all_author_place";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Users users = userService.findByLogin(authentication.getName());
+        if(users.getRole().equals(Role.MANAGER)){
+            return "redirect:/get_all_author_tour";
+        }else {
+            return "redirect:/get_all_tour";
+        }
     }
 }

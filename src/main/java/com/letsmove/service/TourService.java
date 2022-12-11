@@ -83,4 +83,16 @@ public class TourService {
     public ArrayList<Tour> findAllToursByGuidesId(Guides id){
         return tourRepository.findToursByGuidesID(id);
     }
+    public List<Tour> getAllAuthorTour() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Users users = userService.findByLogin(authentication.getName());
+        Guides guides = guidesService.findByUserID(users);
+        return tourRepository.findToursByStatusAndGuidesID(Status.ACTIVE,guides);
+    }
+    public void deleteTour(Integer tourId) {
+        Tour tour = tourRepository.findTourById(tourId);
+        tour.setStatus(Status.UN_ACTIVE);
+        tourRepository.save(tour);
+    }
+
 }
