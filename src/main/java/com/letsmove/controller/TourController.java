@@ -3,11 +3,16 @@ package com.letsmove.controller;
 import com.letsmove.entity.CommentsTour;
 import com.letsmove.entity.Place;
 import com.letsmove.entity.Tour;
+import com.letsmove.entity.Users;
 import com.letsmove.enums.PlaceType;
+import com.letsmove.enums.Role;
 import com.letsmove.enums.Status;
 import com.letsmove.service.CommentsTourService;
 import com.letsmove.service.TourService;
+import com.letsmove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +28,8 @@ public class TourController {
     private TourService tourService;
     @Autowired
     private CommentsTourService commentsTourService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/add_tour", method = RequestMethod.GET)
     public ModelAndView addTour() {
@@ -84,4 +91,30 @@ public class TourController {
         tourService.bookTour(id);
         return "redirect:/look_tour?tourId="+id;
     }
+    @RequestMapping(value = "/get_all_author_tour", method = RequestMethod.GET)
+    public ModelAndView getAllAuthorTour() {
+        ModelAndView modelAndView = new ModelAndView("AllAuthorTour");
+        ArrayList<Tour> allAuthorTour = (ArrayList<Tour>) tourService.getAllAuthorTour();
+        modelAndView.addObject("allAuthorTour", allAuthorTour);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/delete_all_tour", method = RequestMethod.GET)
+    public ModelAndView deleteAllTour() {
+        ModelAndView modelAndView = new ModelAndView("AllAuthorTour");
+        ArrayList<Tour> allAuthorTour = tourService.getAllActiveTour();
+        modelAndView.addObject("allAuthorTour", allAuthorTour);
+        return modelAndView;
+    }
+    @PostMapping(value = "/delete_tour")
+    public String changeRating(@RequestParam(name = "tourId") Integer tourId) {
+        tourService.deleteTour(tourId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Users users = userService.findByLogin(authentication.getName());
+        if(users.getRole().equals(Role.GUIDE)){
+            return "redirect:/get_all_author_tour";
+        }else {
+            return "redirect:/get_all_tour";
+        }
+    }
+
 }
