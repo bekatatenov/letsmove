@@ -16,6 +16,7 @@ import java.util.Optional;
 public interface PlaceRepository extends JpaRepository<Place, Integer> {
     @Transactional
     List<Place> findAllByStatus(Status status);
+
     @Transactional
     Place findPlaceById(Integer id);
 

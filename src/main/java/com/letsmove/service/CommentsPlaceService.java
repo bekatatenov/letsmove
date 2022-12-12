@@ -20,11 +20,11 @@ public class CommentsPlaceService {
     @Autowired
     private PlaceService placeService;
 
-    public List<CommentsPlace> getAllCommentsPlace(Place id){
+    public List<CommentsPlace> getAllCommentsPlace(Place id) {
         return commentsPlaceRepository.findCommentsPlacesByPlaceID(id);
     }
 
-    public void save(CommentsPlace commentsPlace, Integer placeId){
+    public void save(CommentsPlace commentsPlace, Integer placeId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Users users = userService.findByLogin(authentication.getName());
         commentsPlace.setPlaceID(placeService.getPlaceById(placeId));

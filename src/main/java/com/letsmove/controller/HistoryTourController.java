@@ -28,14 +28,15 @@ public class HistoryTourController {
     public ModelAndView historyTour() {
         ArrayList<HistoryTour> userHistoryTour = (ArrayList<HistoryTour>) historyTourService.historyToursForUser();
         ModelAndView modelAndView = new ModelAndView("historyTourForUser");
-        modelAndView.addObject("userHistoryTours",userHistoryTour);
+        modelAndView.addObject("userHistoryTours", userHistoryTour);
         return modelAndView;
     }
+
     @RequestMapping(value = "/history_tour_for_guide", method = RequestMethod.GET)
     public ModelAndView historyTourForGuide() {
         ArrayList<HistoryTour> guidesHistoryTour = (ArrayList<HistoryTour>) historyTourService.historyToursForGuide();
         ModelAndView modelAndView = new ModelAndView("historyTourForGuide");
-        modelAndView.addObject("guideHistoryTours",guidesHistoryTour);
+        modelAndView.addObject("guideHistoryTours", guidesHistoryTour);
         return modelAndView;
     }
 }

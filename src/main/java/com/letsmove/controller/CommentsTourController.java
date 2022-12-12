@@ -20,7 +20,7 @@ public class CommentsTourController {
 
     @PostMapping(value = "/save_tour_comment")
     public String saveTourComment(@ModelAttribute(name = "commentsTour") CommentsTour commentsTour, @RequestParam(name = "tourID") Integer tourId) {
-        commentsTourService.save(commentsTour,tourId );
-        return "redirect:/look_tour?tourId="+tourId;
+        commentsTourService.save(commentsTour, tourId);
+        return "redirect:/look_tour?tourId=" + tourId;
     }
 }

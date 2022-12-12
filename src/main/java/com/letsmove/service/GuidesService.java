@@ -20,6 +20,9 @@ public class GuidesService {
     public Guides save(Guides guides) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users users = userService.findByLogin(auth.getName());
+        if (guides.getImg().isEmpty()) {
+            guides.setImg("https://w7.pngwing.com/pngs/841/727/png-transparent-computer-icons-user-profile-synonyms-and-antonyms-android-android-computer-wallpaper-monochrome-sphere.png");
+        }
         guides.setUsersID(users);
         guides.setAllTour(0);
         users.setRole(Role.GUIDE);
@@ -27,7 +30,7 @@ public class GuidesService {
         return guidesRepository.save(guides);
     }
 
-    public Guides findByUserID(Users users){
+    public Guides findByUserID(Users users) {
         return guidesRepository.findByUsersID(users);
     }
 }

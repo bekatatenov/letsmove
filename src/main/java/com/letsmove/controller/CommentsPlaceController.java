@@ -19,7 +19,7 @@ public class CommentsPlaceController {
 
     @PostMapping(value = "/save_place_comment")
     public String savePlaceComment(@ModelAttribute(name = "commentsPlace") CommentsPlace commentsPlace, @RequestParam(name = "placeID") Integer placeID) {
-        commentsPlaceService.save(commentsPlace,placeID );
-        return "redirect:/look_place?placeId="+placeID;
+        commentsPlaceService.save(commentsPlace, placeID);
+        return "redirect:/look_place?placeId=" + placeID;
     }
 }

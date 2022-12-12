@@ -22,7 +22,7 @@ import java.util.List;
 
 
 @Controller
-public class  PlaceController {
+public class PlaceController {
     @Autowired
     private PlaceService placeService;
     @Autowired
@@ -86,6 +86,7 @@ public class  PlaceController {
         modelAndView.addObject("allActivePlace", allActivePlace);
         return modelAndView;
     }
+
     @RequestMapping(value = "/get_all_hotel", method = RequestMethod.GET)
     public ModelAndView getAllHotel() {
         ModelAndView modelAndView = new ModelAndView("AllPlace");
@@ -93,6 +94,7 @@ public class  PlaceController {
         modelAndView.addObject("allActivePlace", allActivePlace);
         return modelAndView;
     }
+
     @RequestMapping(value = "/get_all_cafe", method = RequestMethod.GET)
     public ModelAndView getAllCafe() {
         ModelAndView modelAndView = new ModelAndView("AllPlace");
@@ -100,6 +102,7 @@ public class  PlaceController {
         modelAndView.addObject("allActivePlace", allActivePlace);
         return modelAndView;
     }
+
     @RequestMapping(value = "/get_all_market", method = RequestMethod.GET)
     public ModelAndView getAllMarket() {
         ModelAndView modelAndView = new ModelAndView("AllPlace");
@@ -107,6 +110,7 @@ public class  PlaceController {
         modelAndView.addObject("allActivePlace", allActivePlace);
         return modelAndView;
     }
+
     @RequestMapping(value = "/get_all_attraction", method = RequestMethod.GET)
     public ModelAndView getAllAttraction() {
         ModelAndView modelAndView = new ModelAndView("AllPlace");
@@ -114,6 +118,7 @@ public class  PlaceController {
         modelAndView.addObject("allActivePlace", allActivePlace);
         return modelAndView;
     }
+
     @RequestMapping(value = "/get_all_shopping_center", method = RequestMethod.GET)
     public ModelAndView getAllShoppingCenter() {
         ModelAndView modelAndView = new ModelAndView("AllPlace");
@@ -121,6 +126,7 @@ public class  PlaceController {
         modelAndView.addObject("allActivePlace", allActivePlace);
         return modelAndView;
     }
+
     @RequestMapping(value = "/get_all_state_institutions", method = RequestMethod.GET)
     public ModelAndView getAllStateInstitutions() {
         ModelAndView modelAndView = new ModelAndView("AllPlace");
@@ -162,6 +168,7 @@ public class  PlaceController {
         modelAndView.addObject("allAuthorPlace", allAuthorPlace);
         return modelAndView;
     }
+
     @RequestMapping(value = "/delete_all_place", method = RequestMethod.GET)
     public ModelAndView deleteAllPlace() {
         ModelAndView modelAndView = new ModelAndView("AllAuthorPlace");
@@ -169,14 +176,15 @@ public class  PlaceController {
         modelAndView.addObject("allAuthorPlace", allAuthorPlace);
         return modelAndView;
     }
+
     @PostMapping(value = "/delete_place")
     public String changeRating(@RequestParam(name = "placeId") Integer placeId) {
         placeService.deletePlace(placeId);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Users users = userService.findByLogin(authentication.getName());
-        if(users.getRole().equals(Role.MANAGER)){
+        if (users.getRole().equals(Role.MANAGER)) {
             return "redirect:/get_all_author_tour";
-        }else {
+        } else {
             return "redirect:/get_all_tour";
         }
     }

@@ -34,11 +34,59 @@
     table {
         margin: auto;
     }
+
+    .sign-up {
+        background-color: white;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    .sign-up:hover {
+        background-color: #38b37b;
+        color: black;
+    }
+
+    .sign-in {
+        background-color: white;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    .sign-in:hover {
+        background-color: #008CBA; /* Green */
+        color: black;
+    }
+
+    .logout {
+        background-color: white;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    .logout:hover {
+        background-color: #f44336;
+        color: black;
+    }
 </style>
 <body>
-<h6><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/adminMain}" type="button">Выход в главное меню</a></h6>
-<h6><a sec:authorize="hasAuthority('USER')" th:href="@{/userMain}" type="button">Выход в главное меню</a></h6>
-<h6><a sec:authorize="hasAuthority('MANAGER')" th:href="@{/managerMain}" type="button">Выход в главное меню</a></h6>
 <div class="container">
 
     <h2>
@@ -53,6 +101,7 @@
             <th>ФОТО</th>
             <th>НАЗВАНИЕ ТУРА</th>
             <th>ЛОГИН ПОСЕТИТЕЛЯ</th>
+            <th>ФОТО ГИДА</th>
             <th>ФИО ГИДА</th>
             <th>Номер Гида</th>
             <th>Дата посещения</th>
@@ -64,6 +113,7 @@
             <td><img th:src="${historyTour.getTourID().getImg()}" height="100" width="100"></td>
             <td th:text="${historyTour.getTourID().getNameTour()}"></td>
             <td th:text="${historyTour.getUsersID().getLogin()}"></td>
+            <td><img th:src="${historyTour.getTourID().getGuidesID().getImg()}" height="100" width="100"></td>
             <td th:text="${historyTour.getTourID().getGuidesID().getFio()}"></td>
             <td th:text="${historyTour.getTourID().getGuidesID().getPhoneNumber()}"></td>
             <td th:text="${historyTour.getCreatedDate()}"></td>
@@ -71,6 +121,14 @@
         </tbody>
     </table>
 </div>
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#">Вернуться на вверх</a>
+        </p>
+        <p class="mb-0">Хотите перейти на главную страницу ---> &nbsp<a href="/">Перейти</a></p>
+    </div>
+</footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.0/datatables.min.js"></script>
 </body>

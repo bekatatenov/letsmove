@@ -93,8 +93,15 @@
                                                 class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
                                             Добавить
                                         </button>
-
                                     </div>
+                                    <p class="text-center text-muted mt-5 mb-0" sec:authorize="hasAuthority('MANAGER')"><a
+                                            th:href="@{/managerMain}"
+                                            class="fw-bold text-body"><u>Отмена
+                                    </u></a></p>
+                                    <p class="text-center text-muted mt-5 mb-0" sec:authorize="hasAuthority('ADMIN')"><a
+                                            th:href="@{/adminMain}"
+                                            class="fw-bold text-body"><u>Отмена
+                                    </u></a></p>
                                 </form>
                             </div>
                         </div>

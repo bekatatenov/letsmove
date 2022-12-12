@@ -50,14 +50,16 @@
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${information}" type="text" name="information" autofocus required
+                                        <input th:value="${information}" type="text" name="information" autofocus
+                                               required
                                                id="form4Example1cg"
                                                class="form-control form-control-lg"/>
                                         <label class="form-label" for="form3Example1cg">Информация:</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${population}" type="number" name="population" autofocus required
+                                        <input th:value="${population}" type="number" name="population" autofocus
+                                               required
                                                id="form5Example1cg"
                                                class="form-control form-control-lg"/>
                                         <label class="form-label" for="form3Example1cg">Население:</label>
@@ -75,8 +77,11 @@
                                                 class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
                                             Добавить
                                         </button>
-
                                     </div>
+                                    <p class="text-center text-muted mt-5 mb-0"><a
+                                            th:href="@{/adminMain}"
+                                            class="fw-bold text-body"><u>Отмена
+                                    </u></a></p>
                                 </form>
                             </div>
                         </div>

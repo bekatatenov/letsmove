@@ -28,7 +28,7 @@ public class CityController {
     public ModelAndView infoCity() {
         ModelAndView modelAndView = new ModelAndView("main");
         City city = cityService.findByName("Бишкек");
-        modelAndView.addObject("city",city);
+        modelAndView.addObject("city", city);
         return modelAndView;
     }
 

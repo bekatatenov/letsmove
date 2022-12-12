@@ -5,8 +5,11 @@ import com.letsmove.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+
 
 @Repository
 public interface ManagerRepository extends JpaRepository<Manager,Integer> {
-    Manager findById(Manager usersID);
+    @Transactional
+    Manager findByUsersID(Users usersID);
 }

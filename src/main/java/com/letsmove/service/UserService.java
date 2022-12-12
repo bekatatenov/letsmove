@@ -37,13 +37,11 @@ public class UserService implements UserDetailsService {
 
     public Users findByEmailUser(String email) {
         return userRepository.findByEmail(email);
-                //.orElseThrow(() -> new NoSuchFieldException("Не найден пользователь по email: " + email));
     }
 
     public void update(Users users) {
         this.userRepository.save(users);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public interface CommentsTourRepository extends JpaRepository<CommentsTour,Integer> {
+public interface CommentsTourRepository extends JpaRepository<CommentsTour, Integer> {
     @Transactional
     List<CommentsTour> findAllByTourID(Tour id);
 }

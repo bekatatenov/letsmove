@@ -11,10 +11,11 @@ import java.util.List;
 
 
 @Repository
-public interface HistoryTourRepository extends JpaRepository<HistoryTour,Integer> {
-@Transactional
-List<HistoryTour> findHistoryToursByUsersID(Users users);
-@Transactional
-List<HistoryTour> findHistoryToursByTourID(Tour tour);
+public interface HistoryTourRepository extends JpaRepository<HistoryTour, Integer> {
+    @Transactional
+    List<HistoryTour> findHistoryToursByUsersID(Users users);
+
+    @Transactional
+    List<HistoryTour> findHistoryToursByTourID(Tour tour);
 
 }

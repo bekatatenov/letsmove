@@ -81,16 +81,18 @@ public class TourController {
         Tour tour = tourService.getTourById(tourId);
         CommentsTour commentsTour = new CommentsTour();
         commentsTour.setTourID(tour);
-        modelAndView.addObject("tour",tour);
-        modelAndView.addObject("commentsTour",commentsTour);
-        modelAndView.addObject("allComments",commentsTourService.getAllCommentsTour(tour));
+        modelAndView.addObject("tour", tour);
+        modelAndView.addObject("commentsTour", commentsTour);
+        modelAndView.addObject("allComments", commentsTourService.getAllCommentsTour(tour));
         return modelAndView;
     }
+
     @PostMapping(value = "/getTour")
-    public String getTour(@RequestParam(name = "tourId") Integer id){
+    public String getTour(@RequestParam(name = "tourId") Integer id) {
         tourService.bookTour(id);
-        return "redirect:/look_tour?tourId="+id;
+        return "redirect:/look_tour?tourId=" + id;
     }
+
     @RequestMapping(value = "/get_all_author_tour", method = RequestMethod.GET)
     public ModelAndView getAllAuthorTour() {
         ModelAndView modelAndView = new ModelAndView("AllAuthorTour");
@@ -98,6 +100,7 @@ public class TourController {
         modelAndView.addObject("allAuthorTour", allAuthorTour);
         return modelAndView;
     }
+
     @RequestMapping(value = "/delete_all_tour", method = RequestMethod.GET)
     public ModelAndView deleteAllTour() {
         ModelAndView modelAndView = new ModelAndView("AllAuthorTour");
@@ -105,14 +108,15 @@ public class TourController {
         modelAndView.addObject("allAuthorTour", allAuthorTour);
         return modelAndView;
     }
+
     @PostMapping(value = "/delete_tour")
     public String changeRating(@RequestParam(name = "tourId") Integer tourId) {
         tourService.deleteTour(tourId);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Users users = userService.findByLogin(authentication.getName());
-        if(users.getRole().equals(Role.GUIDE)){
+        if (users.getRole().equals(Role.GUIDE)) {
             return "redirect:/get_all_author_tour";
-        }else {
+        } else {
             return "redirect:/get_all_tour";
         }
     }

@@ -26,8 +26,11 @@ public class ManagerService {
         return managerRepository.save(manager);
     }
 
-//    public Optional<Object> findById(Users usersID) {
-//        managerRepository.findById(Users usersID);
-//        return
-//    }
+    public Manager findByUserId(Users users) {
+        return managerRepository.findByUsersID(users);
+    }
+
+    public void update(Manager manager) {
+        managerRepository.save(manager);
+    }
 }

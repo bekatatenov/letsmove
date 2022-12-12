@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Repository
-public interface CommentsPlaceRepository extends JpaRepository<CommentsPlace,Integer> {
+public interface CommentsPlaceRepository extends JpaRepository<CommentsPlace, Integer> {
     @Transactional
     List<CommentsPlace> findCommentsPlacesByPlaceID(Place id);
 }

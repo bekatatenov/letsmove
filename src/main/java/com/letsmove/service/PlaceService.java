@@ -2,9 +2,11 @@ package com.letsmove.service;
 
 import com.letsmove.dao.PlaceRepository;
 import com.letsmove.entity.City;
+import com.letsmove.entity.Manager;
 import com.letsmove.entity.Place;
 import com.letsmove.entity.Users;
 import com.letsmove.enums.PlaceType;
+import com.letsmove.enums.Role;
 import com.letsmove.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,11 +32,19 @@ public class PlaceService {
     @Autowired
     private EmailSenderService emailSenderService;
 
+    @Autowired
+    private ManagerService managerService;
+
     public void save(Place place, String cityName) {
         City city = cityService.findByName(cityName);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users user = userService.findByLogin(auth.getName());
-        if(place.getImg().isEmpty()){
+        if (user.getRole().equals(Role.MANAGER)) {
+            Manager manager = managerService.findByUserId(user);
+            manager.setAllPlaces(manager.getAllPlaces() + 1);
+            managerService.update(manager);
+        }
+        if (place.getImg().isEmpty()) {
             place.setImg("https://upload.wikimedia.org/wikipedia/commons/9/9a/%D0%9D%D0%B5%D1%82_%D1%84%D0%BE%D1%82%D0%BE.png");
         }
         place.setUsersID(user);
@@ -58,11 +68,11 @@ public class PlaceService {
         Users users = place.getUsersID();
         if (status.equals("ACTIVE")) {
             place.setStatus(Status.ACTIVE);
-            emailSenderService.sendEmail(users.getEmail(), "Поздравляю, по нашим взглядам ваше заведение "+place.getPlaceName()+" подходит для размещения на нашем сайте. \n Поэтому вам одобренно в доступе. \n Ваше заведение уже размещено на сайте :)", "Фидбек на заявку");
+            emailSenderService.sendEmail(users.getEmail(), "Поздравляю, по нашим взглядам ваше заведение " + place.getPlaceName() + " подходит для размещения на нашем сайте. \n Поэтому вам одобренно в доступе. \n Ваше заведение уже размещено на сайте :)", "Фидбек на заявку");
 
         } else if (status.equals("UN_ACTIVE")) {
             place.setStatus(Status.UN_ACTIVE);
-            emailSenderService.sendEmail(users.getEmail(), "К сожалению, по нашим взглядам ваше заведение "+place.getPlaceName()+" не подходит для размещения на нашем сайте. \n Поэтому вам отказано в доступе. \n Попробуйте переделать вашу заявку и отправить повторно :)", "Фидбек на заявку");
+            emailSenderService.sendEmail(users.getEmail(), "К сожалению, по нашим взглядам ваше заведение " + place.getPlaceName() + " не подходит для размещения на нашем сайте. \n Поэтому вам отказано в доступе. \n Попробуйте переделать вашу заявку и отправить повторно :)", "Фидбек на заявку");
 
         }
         placeRepository.save(place);
@@ -78,38 +88,45 @@ public class PlaceService {
             place.setRating(rating.doubleValue());
         } else {
             double ratingNum = (place.getRating() + rating) / 2;
-            place.setRating(round(ratingNum,1));
+            place.setRating(round(ratingNum, 1));
         }
         placeRepository.save(place);
     }
+
     public void deletePlace(Integer placeId) {
         Place place = placeRepository.findPlaceById(placeId);
         place.setStatus(Status.UN_ACTIVE);
         placeRepository.save(place);
     }
 
-    public List<Place> allHotel(){
+    public List<Place> allHotel() {
         return placeRepository.findPlacesByPlaceType(PlaceType.HOTEL);
     }
-    public List<Place> allAttraction(){
+
+    public List<Place> allAttraction() {
         return placeRepository.findPlacesByPlaceType(PlaceType.ATTRACTION);
     }
-    public List<Place> allCafe(){
+
+    public List<Place> allCafe() {
         return placeRepository.findPlacesByPlaceType(PlaceType.CAFE);
     }
-    public List<Place> allMarket(){
+
+    public List<Place> allMarket() {
         return placeRepository.findPlacesByPlaceType(PlaceType.MARKET);
     }
-    public List<Place> allShoppingCenter(){
+
+    public List<Place> allShoppingCenter() {
         return placeRepository.findPlacesByPlaceType(PlaceType.SHOPPING_CENTER);
     }
-    public List<Place> allStateInstitutions(){
+
+    public List<Place> allStateInstitutions() {
         return placeRepository.findPlacesByPlaceType(PlaceType.STATE_INSTITUTIONS);
     }
+
     public List<Place> getAllAuthorPlace() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Users users = userService.findByLogin(authentication.getName());
-        return placeRepository.findPlacesByStatusAndUsersID(Status.ACTIVE,users);
+        return placeRepository.findPlacesByStatusAndUsersID(Status.ACTIVE, users);
     }
 
     public static double round(double value, int places) {

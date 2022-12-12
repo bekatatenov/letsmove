@@ -27,7 +27,7 @@ public class ManagerController {
     @PostMapping(value = "/manager_registration")
     public String managerRegistration(@ModelAttribute(name = "manager") Manager manager) {
         this.managerService.save(manager);
-        return "managerMain";
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/managerMain", method = RequestMethod.GET)

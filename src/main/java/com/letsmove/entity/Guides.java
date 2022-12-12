@@ -31,6 +31,7 @@ public class Guides {
     @Column(name = "INFO")
     private String info;
 
+    @Lob
     @Column(name = "IMG")
     private String img;
 }

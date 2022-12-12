@@ -21,11 +21,11 @@ public class CommentsTourService {
     @Autowired
     private TourService tourService;
 
-    public List<CommentsTour> getAllCommentsTour(Tour id){
+    public List<CommentsTour> getAllCommentsTour(Tour id) {
         return commentsTourRepository.findAllByTourID(id);
     }
 
-    public void save(CommentsTour commentsTour, Integer tourId){
+    public void save(CommentsTour commentsTour, Integer tourId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Users users = userService.findByLogin(authentication.getName());
         commentsTour.setTourID(tourService.getTourById(tourId));

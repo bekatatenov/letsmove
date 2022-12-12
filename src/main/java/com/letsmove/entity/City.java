@@ -27,6 +27,7 @@ public class City {
     @Column(name = "INFORMATION")
     private String information;
 
+    @Lob
     @Column(name = "IMG")
     private String img;
 
