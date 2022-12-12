@@ -314,13 +314,18 @@
         <li><a href="/get_all_attraction" class="nav-link px-2 link-dark">Достопримечательности</a></li>
         <li><a href="/get_all_place" class="nav-link px-2 link-dark">Заведения</a></li>
         <li><a href="/get_all_tour" class="nav-link px-2 link-dark">Туры</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Инфо</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/login" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('ADMIN')"><a href="/adminMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('MANAGER')"><a href="/managerMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('GUIDE')"><a href="/guideMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('USER')"><a href="/userMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+
     </ul>
 
     <div class="col-md-3 text-end">
-        <a class="logout" href="/login">Выйти</a>
-        <!--        <button type="button" href="/login" class="btn btn-primary1">Sign IN</button>
-                <button type="submit" href="/register" class="btn btn-primary2">Sign UP</button>-->
+        <a sec:authorize="isAnonymous()" class="sign-in" href="/login">Войти</a>
+        <a sec:authorize="isAnonymous()" class="sign-up" href="/register">Зарегистрироваться</a>
+        <a sec:authorize="isAuthenticated()" class="logout" href="/logout">Выйти</a>
     </div>
 </header>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

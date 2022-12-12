@@ -97,6 +97,32 @@
 
 </style>
 <body th:object="${place}">
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <img class="logo"
+             src="https://thumbs.dreamstime.com/z/kyrgyzstan-low-poly-logo-colorful-gradient-travel-country-geometric-style-multicolored-polygonal-rounded-sign-map-153634759.jpg"
+             width="70" height="50" alt="">
+        <p class="big-text">LET'S MOVE</p>
+    </a>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/get_all_attraction" class="nav-link px-2 link-dark">Достопримечательности</a></li>
+        <li><a href="/get_all_place" class="nav-link px-2 link-dark">Заведения</a></li>
+        <li><a href="/get_all_tour" class="nav-link px-2 link-dark">Туры</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/login" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('ADMIN')"><a href="/adminMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('MANAGER')"><a href="/managerMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('GUIDE')"><a href="/guideMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('USER')"><a href="/userMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+
+    </ul>
+
+    <div class="col-md-3 text-end">
+        <a sec:authorize="isAnonymous()" class="sign-in" href="/login">Войти</a>
+        <a sec:authorize="isAnonymous()" class="sign-up" href="/register">Зарегистрироваться</a>
+        <a sec:authorize="isAuthenticated()" class="logout" href="/logout">Выйти</a>
+    </div>
+</header>
 <form th:action="@{/getPlace}" method="post">
     <div class="card mb-3">
         <h1 class="card-title" align="center" th:text="${place.getPlaceName()}"></h1>

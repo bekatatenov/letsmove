@@ -50,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
-                .antMatchers("/", "/login", "/register", "/registration","/change_password", "/forgotPassword", "/passwordRecoveryEmail", "/newPasswordUser")
+                .antMatchers("/", "/login", "/register", "/registration","/change_password", "/forgotPassword", "/passwordRecoveryEmail", "/newPasswordUser","/get_all_tour", "/get_all_place", "/get_all_hotel", "/get_all_cafe", "/get_all_market", "/get_all_attraction", "/get_all_shopping_center", "/get_all_state_institutions")
                 .permitAll()
                 .antMatchers("/manager_registration", "/manager_register", "/guides_registration", "/guides_register")
                 .hasAuthority("USER")
@@ -61,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/save_tour", "/add_tour","/history_tour_for_guide","/delete_tour","/get_all_author_tour")
                 .hasAuthority("GUIDE")
                 .antMatchers("/history_tour_for_user").hasAnyAuthority("USER","ADMIN","MANAGER")
-                .antMatchers("/get_all_tour", "/look_tour", "/getTour", "/save_place_comment", "/get_all_place","/look_place", "/change_rating", "/save_tour_comment", "/get_all_hotel", "/get_all_cafe", "/get_all_market", "/get_all_attraction", "/get_all_shopping_center", "/get_all_state_institutions")
+                .antMatchers( "/look_tour", "/getTour", "/save_place_comment", "/look_place", "/change_rating", "/save_tour_comment")
                 .authenticated()
                 .anyRequest()
                 .authenticated()
