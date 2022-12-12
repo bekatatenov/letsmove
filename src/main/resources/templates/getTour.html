@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Туры</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <!--= <link rel="stylesheet" type="text/css" href="/static/util.css"> =-->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!--===============================================================================================-->
+
+</head>
+<style>
+    body {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    @media (min-width: 0) {
+        .g-mr-15 {
+            margin-right: 1.07143rem !important;
+        }
+    }
+
+    @media (min-width: 0) {
+        .g-mt-3 {
+            margin-top: 0.21429rem !important;
+        }
+    }
+
+    @media (min-width: 0) {
+        .g-pa-30 {
+            padding: 2.14286rem !important;
+        }
+    }
+
+    .g-bg-secondary {
+        background-color: #fafafa !important;
+    }
+
+    .u-shadow-v18 {
+        box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+    }
+
+    .g-color-gray-dark-v4 {
+        color: #777 !important;
+    }
+
+    .g-font-size-12 {
+        font-size: 0.85714rem !important;
+    }
+
+    .media-comment {
+        margin-top: 20px
+    }
+
+    img {
+        max-width: 80%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        border: none;
+    }
+
+    .row {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .col-md-8 {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .mb-3 {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .sign-up {
+        background-color: white;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    .sign-up:hover {
+        background-color: #38b37b;
+        color: black;
+    }
+
+    .sign-in {
+        background-color: white;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    .sign-in:hover {
+        background-color: #008CBA; /* Green */
+        color: black;
+    }
+
+    .logout {
+        background-color: white;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    .logout:hover {
+        background-color: #f44336;
+        color: black;
+    }
+
+</style>
+<body th:object="${tour}">
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <img class="logo"
+             src="https://thumbs.dreamstime.com/z/kyrgyzstan-low-poly-logo-colorful-gradient-travel-country-geometric-style-multicolored-polygonal-rounded-sign-map-153634759.jpg"
+             width="70" height="50" alt="">
+        <p class="big-text">LET'S MOVE</p>
+    </a>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/get_all_attraction" class="nav-link px-2 link-dark">Достопримечательности</a></li>
+        <li><a href="/get_all_place" class="nav-link px-2 link-dark">Заведения</a></li>
+        <li><a href="/get_all_tour" class="nav-link px-2 link-dark">Туры</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/login" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('ADMIN')"><a href="/adminMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('MANAGER')"><a href="/managerMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('GUIDE')"><a href="/guideMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('USER')"><a href="/userMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+
+    </ul>
+
+    <div class="col-md-3 text-end">
+        <a sec:authorize="isAnonymous()" class="sign-in" href="/login">Войти</a>
+        <a sec:authorize="isAnonymous()" class="sign-up" href="/register">Зарегистрироваться</a>
+        <a sec:authorize="isAuthenticated()" class="logout" href="/logout">Выйти</a>
+    </div>
+</header>
+<form th:action="@{/getTour}" method="post">
+    <div class="card mb-3">
+        <input th:value="${tour.getId()}" type="number" hidden="hidden" name="tourId"/>
+        <h1 class="card-title" align="center" th:text="${tour.getNameTour()}"></h1>
+        <hr>
+        <br>
+        <img th:src="${tour.getImg()}">
+        <div class="card-body" align="center">
+            <p><h6>Информация:</h6></p>
+            <p class="card-text" th:text="${tour.getInfo()}"></p>
+            <br>
+            <hr>
+            <input type="submit" value="Забронировать тур"/>
+        </div>
+    </div>
+</form>
+<form th:action="@{/save_tour_comment}" method="post" th:object="${commentsTour}" th:align="center">
+    <input th:value="${tour.getId()}" type="number" hidden="hidden" name="tourID"/>
+    <br>
+    <label><h3>Оставить комментарий :</h3>
+        <textarea th:value="${commentsTour.comment}" type="text" name="comment" cols="25" rows="3"
+                  minlength="1"
+                  maxlength="250" autofocus required></textarea></label>
+    <br>
+    <div><input type="reset" value="сброс">
+        <input type="submit" value="отправить"/></div>
+</form>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<form th:action="@{/look_tour}" method="get" th:object="${allComments}" th:align="center">
+    <div class="container">
+        <div class="row" align="center">
+            <div class="col-md-8" align="center">
+                <div class="media g-mb-30 media-comment">
+                    <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30" th:each="comment:${allComments}">
+                        <div class="g-mb-15">
+                            <h5 class="h5 g-color-gray-dark-v1 mb-0">
+                                <th:block th:text="${comment.getUsersID().getLogin()}"></th:block>
+                            </h5>
+                            <span class="g-color-gray-dark-v4 g-font-size-12"><th:block
+                                    th:text="${comment.getCreatedDate().toGMTString()}"></th:block></span>
+                        </div>
+                        <p>
+                            <th:block th:text="${comment.getComment()}"></th:block>
+                        </p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#">Вернуться на вверх</a>
+        </p>
+        <p class="mb-0">Хотите перейти на главную страницу ---> &nbsp<a href="/">Перейти</a></p>
+    </div>
+</footer>
+</body>
+</html>
