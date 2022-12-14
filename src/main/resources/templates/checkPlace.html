@@ -390,8 +390,8 @@
             <td th:text="${place.id}"></td>
             <td><img th:src="${place.img}" height="100" width="100"></td>
             <td th:text="${place.placeName}"></td>
-            <td th:text="${place.placeType}"></td>
-            <td th:text="${place.address}"></td>
+            <td th:text="${place.placeType.getName()}"></td>
+            <td th:text="${place.getCityID().getName()+', '+place.address}"></td>
             <td th:text="${place.createdDate}"></td>
             <form th:action="@{/save_active_place}" method="post">
                 <input th:value="${place.id}" type="number" hidden="hidden" name="placeId"/>

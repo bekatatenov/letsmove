@@ -146,6 +146,11 @@
         color: black;
     }
 
+    .card-text {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
 </style>
 <body th:object="${place}">
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -161,10 +166,14 @@
         <li><a href="/get_all_place" class="nav-link px-2 link-dark">Заведения</a></li>
         <li><a href="/get_all_tour" class="nav-link px-2 link-dark">Туры</a></li>
         <li sec:authorize="isAnonymous()"><a href="/login" class="nav-link px-2 link-dark">Мой профиль</a></li>
-        <li sec:authorize="hasAuthority('ADMIN')"><a href="/adminMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
-        <li sec:authorize="hasAuthority('MANAGER')"><a href="/managerMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
-        <li sec:authorize="hasAuthority('GUIDE')"><a href="/guideMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
-        <li sec:authorize="hasAuthority('USER')"><a href="/userMain" class="nav-link px-2 link-dark">Мой профиль</a></li>
+        <li sec:authorize="hasAuthority('ADMIN')"><a href="/adminMain" class="nav-link px-2 link-dark">Мой профиль</a>
+        </li>
+        <li sec:authorize="hasAuthority('MANAGER')"><a href="/managerMain" class="nav-link px-2 link-dark">Мой
+            профиль</a></li>
+        <li sec:authorize="hasAuthority('GUIDE')"><a href="/guideMain" class="nav-link px-2 link-dark">Мой профиль</a>
+        </li>
+        <li sec:authorize="hasAuthority('USER')"><a href="/userMain" class="nav-link px-2 link-dark">Мой профиль</a>
+        </li>
 
     </ul>
 
@@ -174,67 +183,67 @@
         <a sec:authorize="isAuthenticated()" class="logout" href="/logout">Выйти</a>
     </div>
 </header>
-    <div class="card mb-3">
-        <h1 class="card-title" align="center" th:text="${place.getPlaceName()}"></h1>
-        <hr>
-        <br>
-        <img th:src="${place.getImg()}">
-        <div class="card-body" align="center">
-            <p><h6>Информация:</h6></p>
-            <p class="card-text" th:text="${place.getInfo()}"></p>
-            <p><h6>Рейтинг:</h6></p>
-            <p class="card-text" th:text="${place.getRating()}"></p>
-            <form th:action="@{/change_rating}" method="post">
-                <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeId"/>
-                <label>Рейтинг :
-                    <select th:value="${rating}" type="number" name="rating">
-                        <option value="5">⭐⭐⭐⭐⭐</option>
-                        <option value="4">⭐⭐⭐⭐</option>
-                        <option value="3">⭐⭐⭐</option>
-                        <option value="2">⭐⭐</option>
-                        <option value="1">⭐</option>
-                    </select>
-                </label>
-                <input type="submit" value="отправить"/>
-            </form>
-            <form th:action="@{/save_place_comment}" method="post" th:object="${commentsPlace}">
-                <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeID"/>
-                <br>
-                <label><h3>Оставить комментарий :</h3>
-                    <textarea th:value="${commentsPlace.comment}" type="text" name="comment" cols="25" rows="3"
-                              minlength="1"
-                              maxlength="150" autofocus required></textarea></label>
-                <br>
-                <div><input type="reset" value="сброс">
-                    <input type="submit" value="отправить"/></div>
-            </form>
-        </div>
+<div class="card mb-3">
+    <h1 class="card-title" align="center" th:text="${place.getPlaceName()}"></h1>
+    <hr>
+    <br>
+    <img th:src="${place.getImg()}">
+    <div class="card-body" align="center">
+        <p><h6>Информация:</h6></p>
+        <p class="card-text" th:text="${place.getInfo()}" displ></p>
+        <p><h6>Рейтинг:</h6></p>
+        <p class="card-text" th:text="${place.getRating()}"></p>
+        <form th:action="@{/change_rating}" method="post">
+            <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeId"/>
+            <label>Рейтинг :
+                <select th:value="${rating}" type="number" name="rating">
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="1">⭐</option>
+                </select>
+            </label>
+            <input type="submit" value="отправить"/>
+        </form>
+        <form th:action="@{/save_place_comment}" method="post" th:object="${commentsPlace}">
+            <input th:value="${place.getId()}" type="number" hidden="hidden" name="placeID"/>
+            <br>
+            <label><h3>Оставить комментарий :</h3>
+                <textarea th:value="${commentsPlace.comment}" type="text" name="comment" cols="25" rows="3"
+                          minlength="1"
+                          maxlength="150" autofocus required></textarea></label>
+            <br>
+            <div><input type="reset" value="сброс">
+                <input type="submit" value="отправить"/></div>
+        </form>
     </div>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <form th:action="@{/look_place}" method="get" th:object="${allComments}" th:align="center">
-        <div class="container">
-            <div class="row" align="center">
-                <div class="col-md-8" align="center">
-                    <div class="media g-mb-30 media-comment">
-                        <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30" th:each="comment:${allComments}">
-                            <div class="g-mb-15">
-                                <h5 class="h5 g-color-gray-dark-v1 mb-0">
-                                    <th:block th:text="${comment.getUsersID().getLogin()}"></th:block>
-                                </h5>
-                                <span class="g-color-gray-dark-v4 g-font-size-12"><th:block
-                                        th:text="${comment.getCreatedDate()}"></th:block></span>
-                            </div>
-                            <p>
-                                <th:block th:text="${comment.getComment()}"></th:block>
-                            </p>
-                            <hr>
+</div>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<form th:action="@{/look_place}" method="get" th:object="${allComments}" th:align="center">
+    <div class="container">
+        <div class="row" align="center">
+            <div class="col-md-8" align="center">
+                <div class="media g-mb-30 media-comment">
+                    <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30" th:each="comment:${allComments}">
+                        <div class="g-mb-15">
+                            <h5 class="h5 g-color-gray-dark-v1 mb-0">
+                                <th:block th:text="${comment.getUsersID().getLogin()}"></th:block>
+                            </h5>
+                            <span class="g-color-gray-dark-v4 g-font-size-12"><th:block
+                                    th:text="${comment.getCreatedDate()}"></th:block></span>
                         </div>
+                        <p>
+                            <th:block th:text="${comment.getComment()}"></th:block>
+                        </p>
+                        <hr>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 </form>
 <footer class="text-muted py-5">
     <div class="container">

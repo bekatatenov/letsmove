@@ -12,8 +12,8 @@ import java.util.Date;
 @Setter
 public class HistoryTour {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comments_tour_id_seq")
-    @SequenceGenerator(name = "comments_tour_id_seq", sequenceName = "comments_tour_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "history_tour_id_seq")
+    @SequenceGenerator(name = "history_tour_id_seq", sequenceName = "history_tour_id_seq", allocationSize = 1)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)

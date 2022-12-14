@@ -232,6 +232,12 @@
         color: black;
     }
 
+    .card-text{
+        overflow: hidden;
+        height: 100px !important;
+    }
+
+
 </style>
 <body>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -273,6 +279,7 @@
                                 <p class="card-text" th:text="${place.getInfo()}"></p>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item" th:text="${place.getPlaceType().getName()}"></li>
+                                    <li class="list-group-item" th:text="${place.getCityID().getName()}"></li>
                                     <li class="list-group-item" th:text="${place.getAddress()}"></li>
                                     <li class="list-group-item" th:text="${place.getRating()}"></li>
                                 </ul>
@@ -289,7 +296,6 @@
                         </div>
                     </div>
                 </tr>
-
             </div>
         </div>
     </div>

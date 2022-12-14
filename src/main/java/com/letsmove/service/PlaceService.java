@@ -100,27 +100,27 @@ public class PlaceService {
     }
 
     public List<Place> allHotel() {
-        return placeRepository.findPlacesByPlaceType(PlaceType.HOTEL);
+        return placeRepository.findPlacesByPlaceTypeAndStatus(PlaceType.HOTEL,Status.ACTIVE);
     }
 
     public List<Place> allAttraction() {
-        return placeRepository.findPlacesByPlaceType(PlaceType.ATTRACTION);
+        return placeRepository.findPlacesByPlaceTypeAndStatus(PlaceType.ATTRACTION,Status.ACTIVE);
     }
 
     public List<Place> allCafe() {
-        return placeRepository.findPlacesByPlaceType(PlaceType.CAFE);
+        return placeRepository.findPlacesByPlaceTypeAndStatus(PlaceType.CAFE,Status.ACTIVE);
     }
 
     public List<Place> allMarket() {
-        return placeRepository.findPlacesByPlaceType(PlaceType.MARKET);
+        return placeRepository.findPlacesByPlaceTypeAndStatus(PlaceType.MARKET,Status.ACTIVE);
     }
 
     public List<Place> allShoppingCenter() {
-        return placeRepository.findPlacesByPlaceType(PlaceType.SHOPPING_CENTER);
+        return placeRepository.findPlacesByPlaceTypeAndStatus(PlaceType.SHOPPING_CENTER,Status.ACTIVE);
     }
 
     public List<Place> allStateInstitutions() {
-        return placeRepository.findPlacesByPlaceType(PlaceType.STATE_INSTITUTIONS);
+        return placeRepository.findPlacesByPlaceTypeAndStatus(PlaceType.STATE_INSTITUTIONS,Status.ACTIVE);
     }
 
     public List<Place> getAllAuthorPlace() {
